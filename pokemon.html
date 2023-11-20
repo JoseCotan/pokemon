@@ -14,8 +14,12 @@
             height: 400px;
             background-color: rgb(216, 216, 216);
             display: none;
-        }
 
+        }
+        #inicial button {
+            margin-left: 10px;
+            margin-top: 10px;
+        }
         #pokemonJugador1, #elegir {
             font-size: 16px;
             padding: 8px;
@@ -28,9 +32,11 @@
 <body>
 
     <div id="inicial">
-        <p>hola</p>
+        <button onclick="atacar()">Atacar</button>
+        <button onclick="cambiar()">Cambiar</button>
+
     </div>
-    <button id="botonInicial" onclick="mostrarTexto()">Mostrar Texto</button><br>
+    <button id="botonInicial" onclick="mostrar()">Mostrar</button><br>
 
     <div id="textoOculto">
         Elige tus pokemon<br>
@@ -57,14 +63,8 @@
         </select>
     </div>
 
-    <script>
-        function mostrarTexto() {
-            var textoOculto = document.getElementById("textoOculto");
-            textoOculto.style.display = "none";
-            inicial.style.display = "block";
-            document.getElementById("botonInicial").style.display = "none";
-        }
-    </script>
+    <script src="pokemon.js"></script>
+
 
 </body>
 
