@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <style>
+        body {
+            padding: 8px;
+        }
+        #inicial {
+            width: 600px;
+            height: 400px;
+            background-color: rgb(216, 216, 216);
+            display: none;
+        }
+
+        #pokemonJugador1, #elegir {
+            font-size: 16px;
+            padding: 8px;
+            margin-top: 8px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="inicial">
+        <p>hola</p>
+    </div>
+    <button id="botonInicial" onclick="mostrarTexto()">Mostrar Texto</button><br>
+
+    <div id="textoOculto">
+        Elige tus pokemon<br>
+        <select id="pokemonJugador1" multiple>
+            <option id="pikachu" value="0">Pikachu</option>
+            <option id="bulbasaur" value="1">Bulbasaur</option>
+            <option id="charmander" value="2">Charmander</option>
+            <option id="squirtle" value="3">Squirtle</option>
+            <option id="pidgey" value="4">Pidgey</option>
+            <option id="rattata" value="5">Rattata</option>
+            <option id="ekans" value="6">Ekans</option>
+            <option id="jigglypuff" value="7">Jigglypuff</option>
+            <option id="meowth" value="8">Meowth</option>
+            <option id="abra" value="9">Abra</option>
+            <option id="machop" value="10">Machop</option>
+            <option id="gastly" value="11">Gastly</option>
+            <option id="diglett" value="12">Diglett</option>
+            <option id="geodude" value="13">Geodude</option>
+            <option id="scyther" value="14">Scyther</option>
+        </select><br>
+        <select id="elegir">
+            <option id="facil">Fácil</option>
+            <option id="facil">Difícil</option>
+        </select>
+    </div>
+
+    <script>
+        function mostrarTexto() {
+            var textoOculto = document.getElementById("textoOculto");
+            textoOculto.style.display = "none";
+            inicial.style.display = "block";
+            document.getElementById("botonInicial").style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>
