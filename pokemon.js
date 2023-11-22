@@ -564,16 +564,47 @@ var pokemons = {
     },
 }
 
+var contGruñido = 0;
+var variar = [1.5, 2, 2.5, 3, 3.5, 4];
 
-var pokemonsUsuario1 = [pokemons.pikachu, pokemons.bulbasaur, pokemons.charmander];
+var pokemonsUsuario1 = [pokemons.pikachu, pokemons.bulbasaur, pokemons.jiglypuff];
 var pokemonsUsuario2 = [pokemons.squirtle, pokemons.ekans, pokemons.geodude];
+
+function encontrarPosicion(nombrePokemon) {
+    let nombresPokemons = Object.keys(pokemons);
+    for (let i = 0; i < nombresPokemons.length; i++) {
+        if (pokemons[nombresPokemons[i]].nombre === nombrePokemon) {
+            return i;
+        }
+    }
+}
+
 
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
     let daño = 0;
     let ataque = pokemonsUsuario1[idPokemon].ataques[idAtaque];
     if (ataque.poder == 0) {
-        //TODO
-        console.log("poder = 0")
+        if (ataque.nombre == "Gruñido") {
+            let i = encontrarPosicion(pokemonUsuario2.nombre);
+            let valorAtaque = structuredClone(Object.values(pokemons)[i].estadisticas.ataque)
+            let reduccion = valorAtaque /= variar[contGruñido]
+            contGruñido++;
+            console.log(reduccion);
+            return;
+        }
+        else if (ataque.nombre == "Canto") {
+            if (ataque.precision > (Math.floor(Math.random() * 101))) {
+                if (pokemonUsuario2.estado == "Dormido") {
+                    console.log("¡El Pokémon ya está dormido!");
+                    return
+                } else {
+                    pokemonUsuario2.estado = "Dormido";
+                    console.log("¡El Pokémon se ha dormido!");
+                    return;
+                }
+            }
+            console.log("Ataque fallido");
+        }
     }
     else if (ataque.poder == 1) {
         //TODO
@@ -600,10 +631,10 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
                 )
             pokemonsUsuario2[0].estadisticas.vida -= daño
             console.log(pokemonsUsuario2[0].estadisticas.vida)
+            return;
         }
-        else {
-            console.log("Ataque fallido")
-        }
+        console.log("Ataque fallido")
+        return;
     }
 }
 
