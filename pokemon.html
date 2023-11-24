@@ -9,6 +9,7 @@
         body {
             padding: 8px;
         }
+
         #inicial {
             width: 600px;
             height: 400px;
@@ -16,15 +17,51 @@
             display: none;
 
         }
-        #inicial button {
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-        #pokemonJugador1, #elegir {
+
+
+        #pokemonJugador1,
+        #elegir {
             font-size: 16px;
             padding: 8px;
             margin-top: 8px;
             width: 200px;
+        }
+
+        #pokemonJugador1 {
+            width: 200px;
+            height: 150px;
+        }
+
+        #guardarPokemones {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #elegir {
+            margin-top: 10px;
+            width: 150px;
+        }
+
+        #botonInicial,
+        #botonAtacar {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #botonInicial:hover
+        #guardarPokemones:hover,
+        #botonAtacar:hover {
+            background-color: rgb(48, 119, 60);
         }
     </style>
 </head>
@@ -38,30 +75,115 @@
     </div>
     <button id="botonInicial" onclick="mostrar()">Mostrar</button><br>
 
-    <div id="textoOculto">
+    <div id="textoOculto"><br>
         Elige tus pokemon<br>
-        <select id="pokemonJugador1" multiple>
-            <option id="pikachu" value="0">Pikachu</option>
-            <option id="bulbasaur" value="1">Bulbasaur</option>
-            <option id="charmander" value="2">Charmander</option>
-            <option id="squirtle" value="3">Squirtle</option>
-            <option id="pidgey" value="4">Pidgey</option>
-            <option id="rattata" value="5">Rattata</option>
-            <option id="ekans" value="6">Ekans</option>
-            <option id="jigglypuff" value="7">Jigglypuff</option>
-            <option id="meowth" value="8">Meowth</option>
-            <option id="abra" value="9">Abra</option>
-            <option id="machop" value="10">Machop</option>
-            <option id="gastly" value="11">Gastly</option>
-            <option id="diglett" value="12">Diglett</option>
-            <option id="geodude" value="13">Geodude</option>
-            <option id="scyther" value="14">Scyther</option>
-        </select><br>
+        <button id="guardarPokemones">Guardar Pokémon Seleccionados</button><br>
         <select id="elegir">
             <option id="facil">Fácil</option>
             <option id="facil">Difícil</option>
         </select>
-        <button onclick="atacar(pokemonsUsuario1[2], pokemonsUsuario2[0], 0, 2)">Atacar</button>
+        <button id="botonAtacar">Atacar</button>
+
+        <fieldset>
+            <legend>Selecciona tus Pokémon (Jugador 1):</legend>
+
+            <input type="checkbox" id="pikachu1" name="pokemonJugador1" value="0">
+            <label for="pikachu1">Pikachu</label>
+
+            <input type="checkbox" id="bulbasaur1" name="pokemonJugador1" value="1">
+            <label for="bulbasaur1">Bulbasaur</label>
+
+            <input type="checkbox" id="charmander1" name="pokemonJugador1" value="2">
+            <label for="charmander1">Charmander</label>
+
+            <input type="checkbox" id="squirtle1" name="pokemonJugador1" value="3">
+            <label for="squirtle1">Squirtle</label>
+
+            <input type="checkbox" id="pidgeotto1" name="pokemonJugador1" value="4">
+            <label for="pidgeotto1">Pidgeotto</label>
+
+            <input type="checkbox" id="rattata1" name="pokemonJugador1" value="5">
+            <label for="rattata1">Rattata</label>
+
+            <input type="checkbox" id="ekans1" name="pokemonJugador1" value="6">
+            <label for="ekans1">Ekans</label>
+
+            <input type="checkbox" id="jigglypuff1" name="pokemonJugador1" value="7">
+            <label for="jigglypuff1">Jigglypuff</label>
+
+            <input type="checkbox" id="abra1" name="pokemonJugador1" value="8">
+            <label for="abra1">Abra</label>
+
+            <input type="checkbox" id="meowth1" name="pokemonJugador1" value="9">
+            <label for="meowth1">Meowth</label>
+
+            <input type="checkbox" id="machop1" name="pokemonJugador1" value="10">
+            <label for="machop1">Machop</label>
+
+            <input type="checkbox" id="gastly1" name="pokemonJugador1" value="11">
+            <label for="gastly1">Gastly</label>
+
+            <input type="checkbox" id="diglett1" name="pokemonJugador1" value="12">
+            <label for="diglett1">Diglett</label>
+
+            <input type="checkbox" id="geodude1" name="pokemonJugador1" value="13">
+            <label for="geodude1">Geodude</label>
+
+            <input type="checkbox" id="scyther1" name="pokemonJugador1" value="14">
+            <label for="scyther1">Scyther</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Selecciona tus Pokémon (Jugador 2):</legend>
+
+            <input type="checkbox" id="pikachu2" name="pokemonJugador2" value="0">
+            <label for="pikachu2">Pikachu</label>
+
+            <input type="checkbox" id="bulbasaur2" name="pokemonJugador2" value="1">
+            <label for="bulbasaur2">Bulbasaur</label>
+
+            <input type="checkbox" id="charmander2" name="pokemonJugador2" value="2">
+            <label for="charmander2">Charmander</label>
+
+            <input type="checkbox" id="squirtle2" name="pokemonJugador2" value="3">
+            <label for="squirtle2">Squirtle</label>
+
+            <input type="checkbox" id="pidgeotto2" name="pokemonJugador2" value="4">
+            <label for="pidgeotto2">Pidgeotto</label>
+
+            <input type="checkbox" id="rattata2" name="pokemonJugador2" value="5">
+            <label for="rattata2">Rattata</label>
+
+            <input type="checkbox" id="ekans2" name="pokemonJugador2" value="6">
+            <label for="ekans2">Ekans</label>
+
+            <input type="checkbox" id="jigglypuff2" name="pokemonJugador2" value="7">
+            <label for="jigglypuff2">Jigglypuff</label>
+
+            <input type="checkbox" id="abra2" name="pokemonJugador2" value="8">
+            <label for="abra2">Abra</label>
+
+            <input type="checkbox" id="meowth2" name="pokemonJugador2" value="9">
+            <label for="meowth2">Meowth</label>
+
+            <input type="checkbox" id="machop2" name="pokemonJugador2" value="10">
+            <label for="machop2">Machop</label>
+
+            <input type="checkbox" id="gastly2" name="pokemonJugador2" value="11">
+            <label for="gastly2">Gastly</label>
+
+            <input type="checkbox" id="diglett2" name="pokemonJugador2" value="12">
+            <label for="diglett2">Diglett</label>
+
+            <input type="checkbox" id="geodude2" name="pokemonJugador2" value="13">
+            <label for="geodude2">Geodude</label>
+
+            <input type="checkbox" id="scyther2" name="pokemonJugador2" value="14">
+            <label for="scyther2">Scyther</label>
+        </fieldset>
+
+        <br>
+        <p id="Pokemon1jugador1">Pokemon1</p>
     </div>
 
     <script src="pokemon.js"></script>

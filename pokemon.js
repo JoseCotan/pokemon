@@ -144,7 +144,7 @@ var ataques = {
     ],
     deslumbrar: [
         {
-            nombre: "Deslumbrar", tipo: "Normal", poder: 0, usosRestantes: 30, precision: 100,
+            nombre: "Deslumbrar", tipo: "Normal", poder: 0, usosRestantes: 30, precision: 75,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
@@ -209,7 +209,7 @@ var ataques = {
     ],
     movimientoSismico: [
         {
-            nombre: "Movimiento sísmimo", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
+            nombre: "Movimiento sísmico", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
             dobleTurno: 0
         }
     ],
@@ -564,58 +564,233 @@ var pokemons = {
     },
 }
 
-var contGruñido = 0;
-var variar = [1.5, 2, 2.5, 3, 3.5, 4];
+// ----- Recogida de datos
 
-var pokemonsUsuario1 = [pokemons.pikachu, pokemons.bulbasaur, pokemons.jiglypuff];
-var pokemonsUsuario2 = [pokemons.squirtle, pokemons.ekans, pokemons.geodude];
+document.getElementById('botonAtacar').addEventListener('click', function () {
+    atacar(pokemonsSeleccionados1[0], pokemonsSeleccionados2[0], 0, 0);
+});
+
+var pokemonsSeleccionados1 = [];
+var pokemonsSeleccionados2 = [];
+
+function updatepokemonsSeleccionados1() {
+    pokemonsSeleccionados1 = [];
+    const checkboxes = document.querySelectorAll('input[name="pokemonJugador1"]:checked');
+
+    checkboxes.forEach(checkbox => {
+        pokemonsSeleccionados1.push(Object.values(pokemons)[checkbox.value]);
+    });
+}
+
+function updatepokemonsSeleccionados2() {
+    pokemonsSeleccionados2 = [];
+    const checkboxes = document.querySelectorAll('input[name="pokemonJugador2"]:checked');
+
+    checkboxes.forEach(checkbox => {
+        pokemonsSeleccionados2.push(Object.values(pokemons)[checkbox.value]);
+    });
+}
+
+function limitarSeleccion(fieldset, updateFunction) {
+    const checkboxes = fieldset.querySelectorAll('input[type="checkbox"]');
+    const limite = 3;
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const marcadas = fieldset.querySelectorAll('input[type="checkbox"]:checked');
+
+            if (marcadas.length > limite) {
+                checkbox.checked = false;
+            }
+            updateFunction();
+        });
+    });
+}
+
+const fieldset1 = document.querySelector('fieldset:nth-of-type(1)');
+const fieldset2 = document.querySelector('fieldset:nth-of-type(2)');
+
+limitarSeleccion(fieldset1, updatepokemonsSeleccionados1);
+limitarSeleccion(fieldset2, updatepokemonsSeleccionados2);
+
+
+
+
 
 function encontrarPosicion(nombrePokemon) {
-    let nombresPokemons = Object.keys(pokemons);
+    let nombresPokemons = Object.keys(POKEMONS1);
     for (let i = 0; i < nombresPokemons.length; i++) {
-        if (pokemons[nombresPokemons[i]].nombre === nombrePokemon) {
+        if (POKEMONS1[nombresPokemons[i]].nombre === nombrePokemon) {
             return i;
         }
     }
 }
 
+var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updatepokemonsSeleccionados1);
+});
+
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updatepokemonsSeleccionados2);
+});
+
+var contGruñido = 0;
+var contAgilidad = 1;
+var contToxico = 1;
+var variar = [1.5, 2, 2.5, 3, 3.5, 4];
+
+const POKEMONS1 = structuredClone(pokemons);
+
+
+function precision(valor) {
+    return valor > (Math.floor(Math.random() * 101));
+}
+
+function fallido() {
+    console.log("¡El ataque ha fallado!")
+}
+
+
 
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
+    console.log(pokemonUsuario1.ataques)
     let daño = 0;
-    let ataque = pokemonsUsuario1[idPokemon].ataques[idAtaque];
+    let ataque = pokemonsSeleccionados1[idPokemon].ataques[idAtaque];
     if (ataque.poder == 0) {
-        if (ataque.nombre == "Gruñido") {
-            let i = encontrarPosicion(pokemonUsuario2.nombre);
-            let valorAtaque = structuredClone(Object.values(pokemons)[i].estadisticas.ataque)
-            let reduccion = valorAtaque /= variar[contGruñido]
-            contGruñido++;
-            console.log(reduccion);
-            return;
-        }
-        else if (ataque.nombre == "Canto") {
-            if (ataque.precision > (Math.floor(Math.random() * 101))) {
-                if (pokemonUsuario2.estado == "Dormido") {
-                    console.log("¡El Pokémon ya está dormido!");
-                    return
-                } else {
-                    pokemonUsuario2.estado = "Dormido";
-                    console.log("¡El Pokémon se ha dormido!");
+        switch (ataque.nombre) {
+            case "Gruñido":
+                let iGruñido = encontrarPosicion(pokemonUsuario2.nombre);
+                let valorAtaqueGruñido = structuredClone(Object.values(POKEMONS1)[iGruñido].estadisticas.ataque)
+                let reduccionGruñido = valorAtaqueGruñido /= variar[contGruñido]
+                contGruñido++;
+                console.log(reduccionGruñido);
+                break;
+            case "Canto":
+                if (precision(ataque.precision)) {
+                    if (pokemonUsuario2.estado == "Dormido") {
+                        console.log("¡El Pokémon ya está dormido!");
+                        return
+                    } else {
+                        pokemonUsuario2.estado = "Dormido";
+                        console.log("¡El Pokémon se ha dormido!");
+                        return;
+                    }
+                }
+                fallido();
+                break;
+            case "Somnífero":
+                if (precision(ataque.precision)) {
+                    if (pokemonUsuario2.estado == "Dormido") {
+                        console.log("¡El Pokémon ya está dormido!");
+                        return
+                    } else {
+                        pokemonUsuario2.estado = "Dormido";
+                        console.log("¡El Pokémon se ha dormido!");
+                        return;
+                    }
+                }
+                fallido();
+                break;
+            case "Hipnosis":
+                if (precision(ataque.precision)) {
+                    if (pokemonUsuario2.estado == "Dormido") {
+                        console.log("¡El Pokémon ya está dormido!");
+                        return
+                    } else {
+                        pokemonUsuario2.estado = "Dormido";
+                        console.log("¡El Pokémon se ha dormido!");
+                        return;
+                    }
+                }
+                fallido();
+                break;
+            case "Deslumbrar":
+                if (precision(ataque.precision)) {
+                    if (pokemonUsuario2.estado == "Paralizado") {
+                        console.log("¡El Pokémon ya está paralizado!");
+                        return
+                    } else {
+                        pokemonUsuario2.estado = "Paralizado";
+                        pokemonUsuario2.estadisticas.velocidad = 0;
+                        console.log("¡El Pokémon se ha paralizado!");
+                        console.log(pokemonUsuario2.estadisticas.velocidad);
+                        return;
+                    }
+                }
+                fallido();
+                break;
+            case "Onda trueno":
+                if (precision(ataque.precision)) {
+                    if (pokemonUsuario2.estado == "Paralizado") {
+                        console.log("¡El Pokémon ya está paralizado!");
+                        return
+                    } else {
+                        pokemonUsuario2.estado = "Paralizado";
+                        pokemonUsuario2.estadisticas.velocidad = 0;
+                        console.log("¡El Pokémon se ha paralizado!");
+                        console.log(pokemonUsuario2.estadisticas.velocidad);
+                        return;
+                    }
+                }
+                fallido();
+                break;
+            case "Agilidad":
+                let iAgilidad = encontrarPosicion(pokemonUsuario2.nombre);
+                let valorVelocidadAgilidad = structuredClone(Object.values(POKEMONS1)[iAgilidad].estadisticas.velocidad)
+                let aumentoVelocidad = valorVelocidadAgilidad *= variar[contAgilidad]
+                contAgilidad += 2;
+                console.log(aumentoVelocidad);
+                break;
+            case "Descanso":
+                if (pokemonUsuario1.estado == "Normal") {
+                    let iDescanso = encontrarPosicion(pokemonUsuario1.nombre);
+                    let valorVida = structuredClone(Object.values(POKEMONS1)[iDescanso].estadisticas.vida)
+                    pokemonUsuario1.estadisticas.vida = valorVida;
+                    pokemonUsuario1.estado = "Dormido";
                     return;
                 }
-            }
-            console.log("Ataque fallido");
+                else if (pokemonUsuario1.estado == "Dormido") {
+                    console.log("¡El pokemon ya se encuentra dormido!");
+                    return;
+                }
+                break;
+            case "Tóxico":
+                let iToxico = encontrarPosicion(pokemonUsuario2.nombre);
+                let dañoToxico = (contToxico * 6.25 * Object.values(POKEMONS1)[iToxico].estadisticas.vida) / 100;
+                contToxico++;
+                console.log("ID pokemon --> " + iToxico);
+                console.log("Daño tóxico en el turno " + (contToxico - 1) + " --> " + dañoToxico);
+                console.log("Contador de tóxico --> " + contToxico);
+                break;
         }
     }
     else if (ataque.poder == 1) {
-        //TODO
-        console.log("poder = 1")
+        switch (ataque.nombre) {
+            case "Movimiento sísmico":
+                pokemonUsuario2.estadisticas.vida -= 100;
+                console.log(pokemonUsuario2.estadisticas.vida)
+                break;
+            case "Super diente":
+                if (pokemonUsuario2.estadisticas.vida < 2) {
+                    pokemonUsuario2.estadisticas.vida = 0;
+                    console.log(pokemonUsuario2.estadisticas.vida)
+                    return;
+                }
+                pokemonUsuario2.estadisticas.vida /= 2;
+                console.log(pokemonUsuario2.estadisticas.vida)
+                break;
+        }
+        console.log(pokemonsSeleccionados1, pokemonsSeleccionados2)
     }
     else if (ataque.inmunidad.includes(pokemonUsuario2.tipo)) {
+        console.log("¡El pokémon es inmune!")
         daño = 0;
         return;
     }
     else {
-        if (ataque.precision > (Math.floor(Math.random() * 101))) {
+        if (precision(ataque.precision)) {
             let daño = 0.01 *                                                      // 0.01
                 (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *            // B
                 ((ataque.efectividad.includes(pokemonUsuario2.tipo)) ? 2 :                // E
@@ -629,15 +804,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
                         pokemonUsuario2.estadisticas.defensa :
                         pokemonUsuario2.estadisticas.defensaEspecial)) + 2
                 )
-            pokemonsUsuario2[0].estadisticas.vida -= daño
-            console.log(pokemonsUsuario2[0].estadisticas.vida)
+            pokemonsSeleccionados2[0].estadisticas.vida -= daño
+            console.log(pokemonsSeleccionados2[0].estadisticas.vida)
             return;
         }
         console.log("Ataque fallido")
         return;
     }
 }
-
 
 function mostrar() {
     var textoOculto = document.getElementById("textoOculto");
