@@ -5,185 +5,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon</title>
+
     <style>
         body {
-            padding: 8px;
+            height: 100vh;
+            margin: 0;
+            background-image: url('imagenes/background.jpg');
+            background-size: cover;
+            color:beige
         }
 
-        #inicial {
-            width: 600px;
-            height: 400px;
-            background-color: rgb(216, 216, 216);
-            display: none;
-
+        fieldset {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #494949;
+            border-radius: 10px;
         }
 
+        legend {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
 
-        #pokemonJugador1,
-        #elegir {
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        .pokemons img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #mostrarValores {
+            padding: 10px 20px;
             font-size: 16px;
-            padding: 8px;
-            margin-top: 8px;
-            width: 200px;
-        }
-
-        #pokemonJugador1 {
-            width: 200px;
-            height: 150px;
-        }
-
-        #guardarPokemones {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
             cursor: pointer;
+            border: 2px solid #3498db;
+            color: #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        #elegir {
+        #mostrarValores:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .selected-pokemon {
+            font-weight: bold;
+        }
+
+        #valoresMostrados,
+        #seleccion {
+            padding: 10px;
+            margin-top: 20px;
+            margin: auto;
+            text-align: center;
+        }
+
+        #combates {
+            display: flex;
+            height: 60vh;
+        }
+
+        .half {
+            flex: 1;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        #vida1, #vida2{
             margin-top: 10px;
-            width: 150px;
+            display: flex;
+            align-items: center;
+            width: 200px;
+            justify-content: center;
         }
 
-        #botonInicial,
-        #botonAtacar {
-            margin-top: 10px;
-            padding: 8px 12px;
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        #barraVida {
+            height: 20px;
+            background-color: #3498db;
+            width: 50%;
+            transition: width 0.5s;
         }
 
-        #botonInicial:hover
-        #guardarPokemones:hover,
-        #botonAtacar:hover {
-            background-color: rgb(48, 119, 60);
+        #numeroVida1, #numeroVida2 {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #3498db;
         }
     </style>
 </head>
 
 <body>
 
+    <br>
+    <!--<button id="botonAtacar">Atacar</button>-->
+
     <div id="inicial">
-        <button onclick="atacar()">Atacar</button>
-        <button onclick="cambiar()">Cambiar</button>
-
-    </div>
-    <button id="botonInicial" onclick="mostrar()">Mostrar</button><br>
-
-    <div id="textoOculto"><br>
-        Elige tus pokemon<br>
-        <button id="guardarPokemones">Guardar Pokémon Seleccionados</button><br>
-        <select id="elegir">
-            <option id="facil">Fácil</option>
-            <option id="facil">Difícil</option>
-        </select>
-        <button id="botonAtacar">Atacar</button>
-
-        <fieldset>
-            <legend>Selecciona tus Pokémon (Jugador 1):</legend>
+        <fieldset class="pokemons">
+            <legend>Selecciona tus Pokémons (Jugador 1)</legend>
 
             <input type="checkbox" id="pikachu1" name="pokemonJugador1" value="0">
-            <label for="pikachu1">Pikachu</label>
+            <label for="pikachu1"><img src="imagenes/pikachu.png" alt="Pikachu"></label>
 
             <input type="checkbox" id="bulbasaur1" name="pokemonJugador1" value="1">
-            <label for="bulbasaur1">Bulbasaur</label>
+            <label for="bulbasaur1"><img src="imagenes/bulbasaur.png" alt="Bulbasaur"></label>
 
             <input type="checkbox" id="charmander1" name="pokemonJugador1" value="2">
-            <label for="charmander1">Charmander</label>
+            <label for="charmander1"><img src="imagenes/charmander.png" alt="Charmander"></label>
 
             <input type="checkbox" id="squirtle1" name="pokemonJugador1" value="3">
-            <label for="squirtle1">Squirtle</label>
+            <label for="squirtle1"><img src="imagenes/vamo a calmarno.png" alt="Squirtle"></label>
 
             <input type="checkbox" id="pidgeotto1" name="pokemonJugador1" value="4">
-            <label for="pidgeotto1">Pidgeotto</label>
+            <label for="pidgeotto1"><img src="imagenes/pidgeotto.png" alt="Pidgeotto"></label>
 
             <input type="checkbox" id="rattata1" name="pokemonJugador1" value="5">
-            <label for="rattata1">Rattata</label>
+            <label for="rattata1"><img src="imagenes/rattata.png" alt="Rattata"></label>
 
             <input type="checkbox" id="ekans1" name="pokemonJugador1" value="6">
-            <label for="ekans1">Ekans</label>
+            <label for="ekans1"><img src="imagenes/ekans.png" alt="Ekans"></label>
 
             <input type="checkbox" id="jigglypuff1" name="pokemonJugador1" value="7">
-            <label for="jigglypuff1">Jigglypuff</label>
+            <label for="jigglypuff1"><img src="imagenes/jigglypuff.png" alt="Jigglypuff"></label>
 
             <input type="checkbox" id="abra1" name="pokemonJugador1" value="8">
-            <label for="abra1">Abra</label>
+            <label for="abra1"><img src="imagenes/abra.png" alt="Abra"></label>
 
             <input type="checkbox" id="meowth1" name="pokemonJugador1" value="9">
-            <label for="meowth1">Meowth</label>
+            <label for="meowth1"><img src="imagenes/meowth.png" alt="Meowth"></label>
 
             <input type="checkbox" id="machop1" name="pokemonJugador1" value="10">
-            <label for="machop1">Machop</label>
+            <label for="machop1"><img src="imagenes/Machop.png" alt="Machop"></label>
 
             <input type="checkbox" id="gastly1" name="pokemonJugador1" value="11">
-            <label for="gastly1">Gastly</label>
+            <label for="gastly1"><img src="imagenes/gastly.png" alt="Gastly"></label>
 
             <input type="checkbox" id="diglett1" name="pokemonJugador1" value="12">
-            <label for="diglett1">Diglett</label>
+            <label for="diglett1"><img src="imagenes/diglett.png" alt="Diglett"></label>
 
             <input type="checkbox" id="geodude1" name="pokemonJugador1" value="13">
-            <label for="geodude1">Geodude</label>
+            <label for="geodude1"><img src="imagenes/geodude.png" alt="Geodude"></label>
 
             <input type="checkbox" id="scyther1" name="pokemonJugador1" value="14">
-            <label for="scyther1">Scyther</label>
+            <label for="scyther1"><img src="imagenes/scyther.png" alt="Scyther"></label>
+
+
         </fieldset>
 
-        <fieldset>
-            <legend>Selecciona tus Pokémon (Jugador 2):</legend>
+        <fieldset class="pokemons">
+            <legend>Selecciona tus Pokémons (Jugador 2)</legend>
 
             <input type="checkbox" id="pikachu2" name="pokemonJugador2" value="0">
-            <label for="pikachu2">Pikachu</label>
+            <label for="pikachu2"><img src="imagenes/pikachu.png" alt="Pikachu"></label>
 
             <input type="checkbox" id="bulbasaur2" name="pokemonJugador2" value="1">
-            <label for="bulbasaur2">Bulbasaur</label>
+            <label for="bulbasaur2"><img src="imagenes/bulbasaur.png" alt="Bulbasaur"></label>
 
             <input type="checkbox" id="charmander2" name="pokemonJugador2" value="2">
-            <label for="charmander2">Charmander</label>
+            <label for="charmander2"><img src="imagenes/charmander.png" alt="Charmander"></label>
 
             <input type="checkbox" id="squirtle2" name="pokemonJugador2" value="3">
-            <label for="squirtle2">Squirtle</label>
+            <label for="squirtle2"><img src="imagenes/vamo a calmarno.png" alt="Squirtle"></label>
 
             <input type="checkbox" id="pidgeotto2" name="pokemonJugador2" value="4">
-            <label for="pidgeotto2">Pidgeotto</label>
+            <label for="pidgeotto2"><img src="imagenes/pidgeotto.png" alt="Pidgeotto"></label>
 
             <input type="checkbox" id="rattata2" name="pokemonJugador2" value="5">
-            <label for="rattata2">Rattata</label>
+            <label for="rattata2"><img src="imagenes/rattata.png" alt="Rattata"></label>
 
             <input type="checkbox" id="ekans2" name="pokemonJugador2" value="6">
-            <label for="ekans2">Ekans</label>
+            <label for="ekans2"><img src="imagenes/ekans.png" alt="Ekans"></label>
 
             <input type="checkbox" id="jigglypuff2" name="pokemonJugador2" value="7">
-            <label for="jigglypuff2">Jigglypuff</label>
+            <label for="jigglypuff2"><img src="imagenes/jigglypuff.png" alt="Jigglypuff"></label>
 
             <input type="checkbox" id="abra2" name="pokemonJugador2" value="8">
-            <label for="abra2">Abra</label>
+            <label for="abra2"><img src="imagenes/abra.png" alt="Abra"></label>
 
             <input type="checkbox" id="meowth2" name="pokemonJugador2" value="9">
-            <label for="meowth2">Meowth</label>
+            <label for="meowth2"><img src="imagenes/meowth.png" alt="Meowth"></label>
 
             <input type="checkbox" id="machop2" name="pokemonJugador2" value="10">
-            <label for="machop2">Machop</label>
+            <label for="machop2"><img src="imagenes/Machop.png" alt="Machop"></label>
 
             <input type="checkbox" id="gastly2" name="pokemonJugador2" value="11">
-            <label for="gastly2">Gastly</label>
+            <label for="gastly2"><img src="imagenes/gastly.png" alt="Gastly"></label>
 
             <input type="checkbox" id="diglett2" name="pokemonJugador2" value="12">
-            <label for="diglett2">Diglett</label>
+            <label for="diglett2"><img src="imagenes/diglett.png" alt="Diglett"></label>
 
             <input type="checkbox" id="geodude2" name="pokemonJugador2" value="13">
-            <label for="geodude2">Geodude</label>
+            <label for="geodude2"><img src="imagenes/geodude.png" alt="Geodude"></label>
 
             <input type="checkbox" id="scyther2" name="pokemonJugador2" value="14">
-            <label for="scyther2">Scyther</label>
+            <label for="scyther2"><img src="imagenes/scyther.png" alt="Scyther"></label>
         </fieldset>
 
-        <br>
-        <p id="Pokemon1jugador1">Pokemon1</p>
+        <div class="contenedor">
+            <button id="mostrarValores">Mostrar Pokémons</button>
+        </div>
+
+
+        <p id="valoresMostrados"></p>
+        <button id="empezar">¡Empezar a luchar!</button>
+    </div>
+    <div id="combates">
+        <div class="half">
+            <h1>Jugador 1</h1>
+            <div id="vida1">
+                <div id="barraVida"></div>
+                <span id="numeroVida1"></span>
+            </div>
+
+            <p id="ataques1"></p>
+        </div>
+        <div class="half">
+            <h1>Jugador 2</h1>
+            <div id="vida2">
+                <div id="barraVida"></div>
+                <span id="numeroVida2"></span>
+            </div>
+
+            <p id="ataques2"></p>
+        </div>
     </div>
 
     <script src="pokemon.js"></script>
