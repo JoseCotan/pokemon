@@ -294,7 +294,8 @@ var pokemons = {
             ataqueEspecial: 218,
             defensaEspecial: 196,
             velocidad: 306
-        }
+        },
+        imagen: 'imagenes/pikachu.png'
     },
     bulbasaur: {
         nombre: "Bulbasaur",
@@ -313,7 +314,8 @@ var pokemons = {
             ataqueEspecial: 251,
             defensaEspecial: 251,
             velocidad: 207
-        }
+        },
+        imagen: 'imagenes/bulbasaur.png'
     },
     charmander: {
         nombre: "Charmander",
@@ -332,7 +334,8 @@ var pokemons = {
             ataqueEspecial: 240,
             defensaEspecial: 218,
             velocidad: 251
-        }
+        },
+        imagen: 'imagenes/charmander.png'
     },
     squirtle: {
         nombre: "Squirtle",
@@ -351,7 +354,8 @@ var pokemons = {
             ataqueEspecial: 218,
             defensaEspecial: 249,
             velocidad: 203
-        }
+        },
+        imagen: 'imagenes/vamo a calmarno.png'
     },
     pidgeotto: {
         nombre: "Pidgeotto",
@@ -370,7 +374,8 @@ var pokemons = {
             ataqueEspecial: 218,
             defensaEspecial: 218,
             velocidad: 265
-        }
+        },
+        imagen: 'imagenes/pidgeotto.png'
     },
     rattata: {
         nombre: "Rattata",
@@ -389,7 +394,8 @@ var pokemons = {
             ataqueEspecial: 163,
             defensaEspecial: 185,
             velocidad: 267
-        }
+        },
+        imagen: 'imagenes/rattata.png'
     },
     ekans: {
         nombre: "Ekans",
@@ -408,9 +414,10 @@ var pokemons = {
             ataqueEspecial: 196,
             defensaEspecial: 227,
             velocidad: 229
-        }
+        },
+        imagen: 'imagenes/ekans.png'
     },
-    jiglypuff: {
+    jigglypuff: {
         nombre: "Jigglypuff",
         tipo: "Normal",
         estado: "Normal",
@@ -427,7 +434,8 @@ var pokemons = {
             ataqueEspecial: 207,
             defensaEspecial: 163,
             velocidad: 152
-        }
+        },
+        imagen: 'imagenes/jigglypuff.png'
     },
     meowth: {
         nombre: "Meowth",
@@ -446,7 +454,8 @@ var pokemons = {
             ataqueEspecial: 196,
             defensaEspecial: 196,
             velocidad: 305
-        }
+        },
+        imagen: 'imagenes/meowth.png'
     },
     abra: {
         nombre: "Abra",
@@ -465,7 +474,8 @@ var pokemons = {
             ataqueEspecial: 339,
             defensaEspecial: 229,
             velocidad: 304
-        }
+        },
+        imagen: 'imagenes/abra.png'
     },
     machop: {
         nombre: "Machop",
@@ -484,7 +494,8 @@ var pokemons = {
             ataqueEspecial: 185,
             defensaEspecial: 185,
             velocidad: 185
-        }
+        },
+        imagen: 'imagenes/machop.png'
     },
     gastly: {
         nombre: "Gastly",
@@ -503,7 +514,8 @@ var pokemons = {
             ataqueEspecial: 328,
             defensaEspecial: 185,
             velocidad: 284
-        }
+        },
+        imagen: 'imagenes/gastly.png'
     },
     diglett: {
         nombre: "Diglett",
@@ -522,7 +534,8 @@ var pokemons = {
             ataqueEspecial: 185,
             defensaEspecial: 207,
             velocidad: 317
-        }
+        },
+        imagen: 'imagenes/diglett.png'
     },
     geodude: {
         nombre: "Geodude",
@@ -541,7 +554,8 @@ var pokemons = {
             ataqueEspecial: 174,
             defensaEspecial: 174,
             velocidad: 152
-        }
+        },
+        imagen: 'imagenes/geodude.png'
     },
     scyther: {
         nombre: "Scyther",
@@ -560,7 +574,8 @@ var pokemons = {
             ataqueEspecial: 195,
             defensaEspecial: 231,
             velocidad: 300
-        }
+        },
+        imagen: 'imagenes/scyther.png'
     },
 }
 
@@ -573,6 +588,10 @@ var pokemons = {
 
 var botonEmpezar = document.getElementById('empezar');
 var combates = document.getElementById('combates');
+var menu1 = document.getElementById('menu1');
+var menu2 = document.getElementById('menu2');
+var menu3 = document.getElementById('menu3');
+var pantalla = document.getElementById('pantalla')
 var pokemonsSeleccionados1 = [];
 var pokemonsSeleccionados2 = [];
 var pokemonInicial1 = 0;
@@ -581,9 +600,21 @@ var pokemonActual1 = 0;
 var pokemonActual2 = 0;
 var jugadorActual = 1;
 var iAtaque = 1;
+var contGruñido = 0;
+var contAgilidad = 1;
+var contToxico = 1;
+var variar = [1.5, 2, 2.5, 3, 3.5, 4];
+const POKEMONS1 = structuredClone(pokemons);
+var pokemonsEstadisticasJugador1;
+var pokemonsEstadisticasJugador2;
+var valorJugador1;
+var valorJugador2;
 
 botonEmpezar.style.display = 'none';
 combates.style.display = 'none';
+menu1.style.display = 'none';
+menu2.style.display = 'none';
+menu3.style.display = 'none';
 
 
 document.getElementById('mostrarValores').addEventListener('click', function () {
@@ -591,19 +622,19 @@ document.getElementById('mostrarValores').addEventListener('click', function () 
 
     valoresMostrados.innerHTML = "";
 
-    valoresMostrados.innerHTML += "<strong>Pokémons seleccionados jugador 1:</strong><br>";
+    valoresMostrados.innerHTML += "Pokémons seleccionados jugador 1:<br>";
     pokemonsSeleccionados1.forEach(function (pokemon, index) {
-        valoresMostrados.innerHTML += `${pokemon.nombre} --> Opción ${index + 1}<br>`;
+        valoresMostrados.innerHTML += `<strong>${pokemon.nombre}</strong> --> Opción ${index + 1}<br>`;
     });
 
     valoresMostrados.innerHTML += "<br>";
-    valoresMostrados.innerHTML += "<strong>Pokémons seleccionados jugador 2:</strong><br>";
+    valoresMostrados.innerHTML += "Pokémons seleccionados jugador 2:<br>";
     pokemonsSeleccionados2.forEach(function (pokemon, index) {
-        valoresMostrados.innerHTML += `${pokemon.nombre} --> Opción ${index + 1}<br>`;
+        valoresMostrados.innerHTML += `<strong>${pokemon.nombre}</strong> --> Opción ${index + 1}<br>`;
     });
 
     if (pokemonsSeleccionados1.length === 3 && pokemonsSeleccionados2.length === 3) {
-        valoresMostrados.innerHTML += "<button onclick='inicial()'>Seleccionar Pokémon inicial</button>";
+        valoresMostrados.innerHTML += "<button id='seleccionarIniciales' onclick='inicial()'>Seleccionar Pokémon inicial</button>";
     }
 });
 
@@ -612,13 +643,13 @@ function inicial() {
     if (jugadorActual === 1) {
         document.getElementById('mostrarValores').remove()
         valoresMostrados.innerHTML = `Selecciona el Pokémon del jugador ${jugadorActual}: <input type="password" id='seleccion'>`;
-        valoresMostrados.innerHTML += "<button onclick='inicial()'>Seleccionar Pokémon inicial</button>";
+        valoresMostrados.innerHTML += "<button id='seleccionarIniciales' onclick='inicial()'>Seleccionar Pokémon inicial</button>";
         document.getElementById('seleccion').style.display = 'block';
         document.getElementById('seleccion').setAttribute('oninput', 'guardarPokemonInicial(1)');
         jugadorActual++;
     } else if (jugadorActual === 2) {
         valoresMostrados.innerHTML = `Selecciona el Pokémon del jugador ${jugadorActual}: <input type="password" id='seleccion'>`;
-        valoresMostrados.innerHTML += "<button onclick='inicial()'>Seleccionar Pokémon inicial</button>";
+        valoresMostrados.innerHTML += "<button id='seleccionarIniciales' onclick='inicial()'>Seleccionar Pokémon inicial</button>";
         document.getElementById('seleccion').style.display = 'block';
         document.getElementById('seleccion').setAttribute('oninput', 'guardarPokemonInicial(2)');
         jugadorActual++;
@@ -626,6 +657,8 @@ function inicial() {
         valoresMostrados.innerHTML = `El jugador 1 empieza usando a ${pokemonsSeleccionados1[pokemonInicial1].nombre}`;
         valoresMostrados.innerHTML += `<br>El jugador 2 empieza usando a ${pokemonsSeleccionados2[pokemonInicial2].nombre}`;
         botonEmpezar.style.display = 'inline-block';
+        pokemonsEstadisticasJugador1 = structuredClone(pokemonsSeleccionados1);
+        pokemonsEstadisticasJugador2 = structuredClone(pokemonsSeleccionados2);
     }
 }
 
@@ -709,32 +742,94 @@ checkboxes.forEach(checkbox => {
 
 document.getElementById('empezar').addEventListener('click', function () {
     combates.style.display = 'flex';
+    menu1.style.display = 'flex';
+    menu2.style.display = 'flex';
+    menu3.style.display = 'flex';
+    pantalla.innerHTML = 'Turno del Jugador 1'
     document.getElementById('inicial').innerHTML = '';
 
     mostrarVida();
+    mostrarEstado();
     mostrarAtaques();
+    mostrarPokemonsRestantes();
+    mostrarImagenes();
 });
+
+
+function mostrarEstado() {
+    var estadoPokemon1 = document.getElementById("estadoPokemon1")
+    if (estadoPokemon1 == "Paralizado") {
+        estadoPokemon1.innerHTML = `Estado actual:<span style="color: yellow;">
+                ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`
+    } else if (estadoPokemon1 == "Dormido") {
+        estadoPokemon1.innerHTML = `Estado actual:<span style="color: cyan;">
+                ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`
+    }
+    estadoPokemon1.innerHTML = `Estado actual:
+                ${pokemonsSeleccionados1[pokemonActual1].estado}.`
+
+
+
+    var estadoPokemon2 = document.getElementById("estadoPokemon2");
+    if (estadoPokemon2 == "Paralizado") {
+        estadoPokemon2.innerHTML = `Estado actual:<span style="color: yellow;">
+                            ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`
+    } else if (estadoPokemon2 == "Dormido") {
+        estadoPokemon2.innerHTML = `Estado actual:<span style="color: cyan;">
+                ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`
+    }
+    estadoPokemon2.innerHTML = `Estado actual:
+                ${pokemonsSeleccionados2[pokemonActual2].estado}.`
+
+}
 
 function mostrarAtaques() {
     listaAtaques(pokemonsSeleccionados1[pokemonActual1]);
-    listaAtaques(pokemonsSeleccionados2[pokemonActual2])
+    listaAtaques(pokemonsSeleccionados2[pokemonActual2]);
 }
 
 function mostrarVida() {
-    var vida1 = document.getElementById('vida1');
-    var vida2 = document.getElementById('vida2');
-    var numeroVida1 = document.getElementById('numeroVida1');
-    var numeroVida2 = document.getElementById('numeroVida2');
+    var vida1 = document.getElementById("vida1");
+    var vida2 = document.getElementById("vida2");
+    var numeroVida1 = document.getElementById("numeroVida1");
+    var numeroVida2 = document.getElementById("numeroVida2");
     console.log(pokemons)
-    var anchoBarra = (pokemonsSeleccionados1[pokemonActual1].estadisticas.vida / pokemonsSeleccionados1[pokemonActual1].estadisticas.vida) * 100;
+    var anchoBarra = (pokemonsSeleccionados1[pokemonActual1].estadisticas.vida / pokemonsEstadisticasJugador1[pokemonActual1].estadisticas.vida) * 100;
     vida1.style.width = anchoBarra + '%';
 
     numeroVida1.innerText = pokemonsSeleccionados1[pokemonActual1].estadisticas.vida;
 
-    var anchoBarra = (pokemonsSeleccionados2[pokemonActual2].estadisticas.vida / pokemonsSeleccionados2[pokemonActual2].estadisticas.vida) * 100;
+    var anchoBarra = (pokemonsSeleccionados2[pokemonActual2].estadisticas.vida / pokemonsEstadisticasJugador2[pokemonActual2].estadisticas.vida) * 100;
     vida2.style.width = anchoBarra + '%';
 
     numeroVida2.innerText = pokemonsSeleccionados2[pokemonActual2].estadisticas.vida;
+}
+
+function mostrarPokemonsRestantes() {
+    var pokemonsRestantes1 = document.getElementById("pokemonsRestantes1");
+    var pokemonsRestantes2 = document.getElementById("pokemonsRestantes2");
+    pokemonsRestantes1.innerHTML = ''
+    for (let i = 0; i < pokemonsSeleccionados1.length; i++) {
+        pokemonsRestantes1.innerHTML += `${pokemonsSeleccionados1[i].nombre} -- Vida restante:
+                ${pokemonsSeleccionados1[i].estadisticas.vida} -- Estado:
+                ${pokemonsSeleccionados1[i].estado}.<br>`;
+    }
+    for (let i = 0; i < pokemonsSeleccionados2.length; i++) {
+        pokemonsRestantes2.innerHTML += `${pokemonsSeleccionados2[i].nombre} -- Vida restante:
+                ${pokemonsSeleccionados2[i].estadisticas.vida} -- Estado:
+                ${pokemonsSeleccionados2[i].estado}.<br>`;
+    }
+}
+
+function mostrarImagenes() {
+    var contenedorImagen1 = document.getElementById('pokemonImagen1');
+    var contenedorImagen2 = document.getElementById('pokemonImagen2');
+    var imagenPokemon1 = document.createElement('img');
+    var imagenPokemon2 = document.createElement('img');
+    imagenPokemon1.src = pokemonsSeleccionados1[pokemonActual1].imagen;
+    contenedorImagen1.appendChild(imagenPokemon1);
+    imagenPokemon2.src = pokemonsSeleccionados2[pokemonActual2].imagen;
+    contenedorImagen2.appendChild(imagenPokemon2);
 }
 
 function listaAtaques(pokemon) {
@@ -752,18 +847,6 @@ function listaAtaques(pokemon) {
 }
 
 
-
-var contGruñido = 0;
-var contAgilidad = 1;
-var contToxico = 1;
-var variar = [1.5, 2, 2.5, 3, 3.5, 4];
-
-
-const POKEMONS1 = structuredClone(pokemons);
-var pokemonsEstadisticasJugador1 = structuredClone(pokemons)
-var pokemonsEstadisticasJugador2 = structuredClone(pokemons)
-
-
 function precision(valor) {
     return valor > (Math.floor(Math.random() * 101));
 }
@@ -772,27 +855,100 @@ function fallido() {
     console.log("¡El ataque ha fallado!")
 }
 
-function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
-    console.log(pokemonsSeleccionados1)
+var contAccion = 1;
+var jugador1HaAtacado = false;
+var jugador2HaAtacado = false;
+
+function compararVelocidad(pokemon1, pokemon2) {
+    return pokemon1.estadisticas.velocidad > pokemon2.estadisticas.velocidad;
+}
+
+document.getElementById('hacerAccion').addEventListener('click', function () {
+
+    if (contAccion == 1) {
+        valorJugador1 = document.getElementById('accion').value - 1;
+        document.getElementById('accion').value = ''
+        pantalla.innerHTML = "Turno del Jugador 2";
+        contAccion++
+        return;
+    } else if (contAccion == 2) {
+        valorJugador2 = document.getElementById('accion').value - 1;
+        document.getElementById('accion').value = ''
+        contAccion++
+
+    }
+    if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+        atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
+            valorJugador1);
+        console.log("El jugador 1 acaba de atacar, siendo más rápido que el jugador 2")
+        jugador1HaAtacado = true;
+        return;
+    } else if (compararVelocidad(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1]) && !jugador2HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 1
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+        atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
+            valorJugador1);
+        console.log("El jugador 2 acaba de atacar, siendo más rápido que el jugador 1")
+        jugador2HaAtacado = true;
+        return;
+    } else if (!jugador1HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+        atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
+            valorJugador1);
+        console.log("El jugador 1 acaba de atacar, siendo menos rápido que el jugador 2")
+        jugador1HaAtacado = true;
+        return;
+    } else if (!jugador2HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 1
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+        atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
+            valorJugador1);
+        console.log("El jugador 2 acaba de atacar, siendo menos rápido que el jugador 1")
+        jugador2HaAtacado = true;
+        return;
+    }
+
+    jugador1HaAtacado = jugador2HaAtacado = false;
+    contAccion = 1;
+    pantalla.innerHTML = "Turno del Jugador 1";
+
+    console.log(valorJugador1)
+
+});
+
+
+
+function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque) {
+    console.log((pokemonUsuario2 == pokemonUsuario1));
+    console.log(idAtaque)
     let daño = 0;
-    let ataque = pokemonsSeleccionados1[idPokemon].ataques[idAtaque];
+    let ataque = pokemonUsuario1.ataques[idAtaque];
     if (ataque.poder == 0) {
         switch (ataque.nombre) {
             case "Gruñido":
                 let iGruñido = encontrarPosicion(pokemonUsuario2.nombre);
                 let valorAtaqueGruñido = structuredClone(Object.values(POKEMONS1)[iGruñido].estadisticas.ataque)
-                let reduccionGruñido = valorAtaqueGruñido /= variar[contGruñido]
+                pokemonUsuario2.estadisticas.ataque = valorAtaqueGruñido /= variar[contGruñido]
                 contGruñido++;
-                console.log(reduccionGruñido);
+                console.log("---");
+                console.log(pokemonsEstadisticasJugador2[0].estadisticas.ataque);
+                document.getElementById("pantalla").innerHTML += `¡El Ataque de
+                                ${pokemonUsuario2.nombre} ha sido reducido!`
                 break;
             case "Canto":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        console.log("¡El Pokémon ya está dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        console.log("¡El Pokémon se ha dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} se ha dormido!`
+                        mostrarEstado();
                         break;
                     }
                 }
@@ -801,11 +957,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
             case "Somnífero":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        console.log("¡El Pokémon ya está dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        console.log("¡El Pokémon se ha dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} se ha dormido!`
+                        mostrarEstado();
                         break;
                     }
                 }
@@ -814,11 +973,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
             case "Hipnosis":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        console.log("¡El Pokémon ya está dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        console.log("¡El Pokémon se ha dormido!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} se ha dormido!`
+                        mostrarEstado();
                         break;
                     }
                 }
@@ -827,13 +989,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
             case "Deslumbrar":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Paralizado") {
-                        console.log("¡El Pokémon ya está paralizado!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Paralizado";
-                        pokemonUsuario2.estadisticas.velocidad = 0;
-                        console.log("¡El Pokémon se ha paralizado!");
-                        console.log(pokemonUsuario2.estadisticas.velocidad);
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} se ha paralizado!`
+                        mostrarEstado();
                         break;
                     }
                 }
@@ -842,13 +1005,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
             case "Onda trueno":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Paralizado") {
-                        console.log("¡El Pokémon ya está paralizado!");
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Paralizado";
-                        pokemonUsuario2.estadisticas.velocidad = 0;
-                        console.log("¡El Pokémon se ha paralizado!");
-                        console.log(pokemonUsuario2.estadisticas.velocidad);
+                        document.getElementById("pantalla").innerHTML += `¡El pokémon
+                        ${pokemonUsuario2.nombre} se ha paralizado!`
+                        mostrarEstado();
                         break;
                     }
                 }
@@ -905,7 +1069,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
     else if (ataque.inmunidad.includes(pokemonUsuario2.tipo)) {
         console.log("¡El pokémon es inmune!")
         daño = 0;
-
     }
     else {
         if (precision(ataque.precision)) {
@@ -924,18 +1087,10 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idPokemon) {
                 )
             pokemonsSeleccionados2[0].estadisticas.vida -= daño
             console.log(pokemonsSeleccionados2[0].estadisticas.vida)
-
+            return;
         }
         console.log("Ataque fallido")
-
     }
-    document.getElementById("0").innerHTML = pokemonUsuario2.estadisticas.vida;
-    document.getElementById("1").innerHTML = pokemonUsuario1.ataques[0].nombre;
-    document.getElementById("2").innerHTML = pokemonUsuario1.ataques[1].nombre;
-    document.getElementById("3").innerHTML = pokemonUsuario1.ataques[2].nombre;
-    document.getElementById("4").innerHTML = pokemonUsuario1.ataques[3].nombre;
-
-
 }
 
 function mostrar() {
