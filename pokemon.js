@@ -992,11 +992,11 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
 
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
+    console.log(pokemonUsuario1.estadisticas.vida <= 0);
+    console.log(idJugador);
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
-    console.log("Tipo del Pokémon:", (pokemonUsuario2.tipo));
-    console.log("Inmunidades del Ataque:", (ataque.inmunidad));
-    console.log("¿Es inmune?", pokemonUsuario2.ataque.inmunidad.includes(tipo));
+
     if (ataque.poder == 0) {
         switch (ataque.nombre) {
             case "Gruñido":
@@ -1119,7 +1119,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
 
         }
     }
-
     else if (ataque.poder == 1) {
         switch (ataque.nombre) {
             case "Movimiento sísmico":
@@ -1138,15 +1137,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         }
         console.log(pokemonsSeleccionados1, pokemonsSeleccionados2)
     }
-    else if ("prueba") {
-        pantalla.innerHTML += "¡El pokémon es inmune!";
+    else if (ataque.inmunidad.includes(pokemonUsuario2.tipo)) {
+        console.log("¡El pokémon es inmune!")
         daño = 0;
     }
     else {
         if (precision(ataque.precision)) {
             let daño = 0.01 *                                                      // 0.01
-                (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *
-                console.log(ataque.efectividad.includes(pokemonUsuario2.tipo))           // B
+                (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *            // B
                 ((ataque.efectividad.includes(pokemonUsuario2.tipo)) ? 2 :                // E
                     (ataque.debilidad.includes(pokemonUsuario2.tipo)) ? 0.5 : 1) *        // E
                 (Math.floor(Math.random() * (16) + 85)) *                          // V
