@@ -441,26 +441,6 @@ var pokemons = {
         },
         imagen: 'imagenes/jigglypuff.png'
     },
-    meowth: {
-        nombre: "Meowth",
-        tipo: "Normal",
-        estado: "Normal",
-        ataques: [
-            ...ataques.ataqueRapido,
-            ...ataques.cuchillada,
-            ...ataques.rayo,
-            ...ataques.golpeCuerpo,
-        ],
-        estadisticas: {
-            vida: 284,
-            ataque: 207,
-            defensa: 185,
-            ataqueEspecial: 196,
-            defensaEspecial: 196,
-            velocidad: 305
-        },
-        imagen: 'imagenes/meowth.png'
-    },
     abra: {
         nombre: "Abra",
         tipo: "Psíquico",
@@ -480,6 +460,26 @@ var pokemons = {
             velocidad: 304
         },
         imagen: 'imagenes/abra.png'
+    },
+    meowth: {
+        nombre: "Meowth",
+        tipo: "Normal",
+        estado: "Normal",
+        ataques: [
+            ...ataques.ataqueRapido,
+            ...ataques.cuchillada,
+            ...ataques.rayo,
+            ...ataques.golpeCuerpo,
+        ],
+        estadisticas: {
+            vida: 284,
+            ataque: 207,
+            defensa: 185,
+            ataqueEspecial: 196,
+            defensaEspecial: 196,
+            velocidad: 305
+        },
+        imagen: 'imagenes/meowth.png'
     },
     machop: {
         nombre: "Machop",
@@ -686,7 +686,7 @@ function guardarPokemonInicial(jugador) {
 }
 
 
-function updatepokemonsSeleccionados1() {
+function actualizarPokemonsSeleccionados1() {
     pokemonsSeleccionados1 = [];
     const checkboxes = document.querySelectorAll('input[name="pokemonJugador1"]:checked');
 
@@ -695,7 +695,7 @@ function updatepokemonsSeleccionados1() {
     });
 }
 
-function updatepokemonsSeleccionados2() {
+function actualizarPokemonsSeleccionados2() {
     pokemonsSeleccionados2 = [];
     const checkboxes = document.querySelectorAll('input[name="pokemonJugador2"]:checked');
 
@@ -704,7 +704,7 @@ function updatepokemonsSeleccionados2() {
     });
 }
 
-function limitarSeleccion(fieldset, updateFunction) {
+function limitarSeleccion(fieldset, actualizarFuncion) {
     const checkboxes = fieldset.querySelectorAll('input[type="checkbox"]');
     const limite = 3;
 
@@ -715,7 +715,7 @@ function limitarSeleccion(fieldset, updateFunction) {
             if (marcadas.length > limite) {
                 checkbox.checked = false;
             }
-            updateFunction();
+            actualizarFuncion();
         });
     });
 }
@@ -723,8 +723,8 @@ function limitarSeleccion(fieldset, updateFunction) {
 const fieldset1 = document.querySelector('fieldset:nth-of-type(1)');
 const fieldset2 = document.querySelector('fieldset:nth-of-type(2)');
 
-limitarSeleccion(fieldset1, updatepokemonsSeleccionados1);
-limitarSeleccion(fieldset2, updatepokemonsSeleccionados2);
+limitarSeleccion(fieldset1, actualizarPokemonsSeleccionados1);
+limitarSeleccion(fieldset2, actualizarPokemonsSeleccionados2);
 
 function encontrarPosicion(nombrePokemon) {
     let nombresPokemons = Object.keys(POKEMONS1);
@@ -738,11 +738,11 @@ function encontrarPosicion(nombrePokemon) {
 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', updatepokemonsSeleccionados1);
+    checkbox.addEventListener('change', actualizarPokemonsSeleccionados1);
 });
 
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', updatepokemonsSeleccionados2);
+    checkbox.addEventListener('change', actualizarPokemonsSeleccionados2);
 });
 
 document.getElementById('empezar').addEventListener('click', function () {
@@ -783,7 +783,7 @@ function mostrarEstado() {
 
     var estadoPokemon2 = document.getElementById("estadoPokemon2");
     if (comprobarParalizado2()) {
-        estadoPokemon2.innerHTML = `Estado actual:<span style="color: ${yellow};">
+        estadoPokemon2.innerHTML = `Estado actual:<span style="color: yellow;">
                             ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
     } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Dormido") {
         estadoPokemon2.innerHTML = `Estado actual:<span style="color: cyan;">
@@ -843,7 +843,8 @@ function mostrarPokemonsRestantes() {
         pokemonsRestantes1.innerHTML += `<span style="${ponerEstiloColor(pokemonsSeleccionados1[i])}">
                 ${pokemonsSeleccionados1[i].nombre} -- Vida restante:
                 ${Math.trunc(pokemonsSeleccionados1[i].estadisticas.vida)} -- Estado:
-                ${pokemonsSeleccionados1[i].estado}.</span><br>`;
+                ${pokemonsSeleccionados1[i].estado} -- Número:
+                ${i + 5}</span><br>`;
     }
 
     pokemonsRestantes2.innerHTML = '';
@@ -851,7 +852,9 @@ function mostrarPokemonsRestantes() {
         pokemonsRestantes2.innerHTML += `<span style="${ponerEstiloColor(pokemonsSeleccionados2[i])}">
                 ${pokemonsSeleccionados2[i].nombre} -- Vida restante:
                 ${Math.trunc(pokemonsSeleccionados2[i].estadisticas.vida)} -- Estado:
-                ${pokemonsSeleccionados2[i].estado}.</span><br>`;
+                ${pokemonsSeleccionados2[i].estado} -- Número:
+                ${i + 5}</span><br>`;
+
     }
 }
 
@@ -867,6 +870,10 @@ function ponerEstiloColor(pokemon) {
     } else {
         return "";
     }
+}
+
+function eliminarImagenes() {
+    document.getElementById('pokemonImagen2').removeChild();
 }
 
 function mostrarImagenes() {
@@ -928,11 +935,13 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
     if (contAccion == 0) {
         let nuevoPokemonIndex = parseInt(document.getElementById('accion').value);
-        if (nuevoPokemonIndex >= 0 && nuevoPokemonIndex < pokemonsSeleccionados2.length) {
-            pokemonsSeleccionados2.splice(pokemonActual2, 1);
-            pokemonActual2 = nuevoPokemonIndex;
+        if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
+            && pokemonsSeleccionados2[nuevoPokemonIndex - 5].estado != "Debilitado") {
+            pokemonActual2 = nuevoPokemonIndex - 5;
+            mostrarImagenes();
         } else {
             console.error("Índice de nuevo Pokémon no válido");
+            return;
         }
     }
 
@@ -992,10 +1001,12 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
 
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
-    console.log(pokemonUsuario1.estadisticas.vida <= 0);
-    console.log(idJugador);
+
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
+    console.log(ataque.inmunidad[0]);
+    console.log(pokemonUsuario2.tipo);
+    console.log(pokemonUsuario2.tipo.includes(ataque.inmunidad[0]));
 
     if (ataque.poder == 0) {
         switch (ataque.nombre) {
@@ -1137,8 +1148,8 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         }
         console.log(pokemonsSeleccionados1, pokemonsSeleccionados2)
     }
-    else if (ataque.inmunidad.includes(pokemonUsuario2.tipo)) {
-        console.log("¡El pokémon es inmune!")
+    else if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
+        pantalla.innerHTML += "¡El pokémon es inmune!";
         daño = 0;
     }
     else {
@@ -1170,11 +1181,11 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             pokemonDebilitado1 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
-            if (idJugador === 1) {
-                pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
-            } else {
-                pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
-            }
+            //if (idJugador === 1) {
+            //    pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
+            //} else {
+            //    pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
+            //}
         } else {
             pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
             pokemonUsuario2.estado = "Debilitado";
@@ -1182,11 +1193,11 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             pokemonDebilitado2 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
-            if (idJugador === 1) {
-                pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
-            } else {
-                pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
-            }
+            //if (idJugador === 1) {
+            //   pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
+            //} else {
+            //    pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
+            //}
         }
 
     }
