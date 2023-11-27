@@ -67,7 +67,9 @@
             color: #fff;
         }
 
-        #seleccionarIniciales {
+
+        #seleccionarIniciales,
+        #empezar {
             padding: 10px 20px;
             font-size: 16px;
             text-align: center;
@@ -80,7 +82,14 @@
             margin-top: 0.5%;
         }
 
-        #seleccionarIniciales:hover {
+        #botonEmpezar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #seleccionarIniciales:hover,
+        #empezar:hover {
             background-color: #001f33;
             color: #ffffff;
         }
@@ -113,6 +122,7 @@
             height: 60vh;
             overflow: auto;
         }
+
         #menu1 {
             display: flex;
             overflow: auto;
@@ -138,17 +148,16 @@
         #vida1,
         #vida2 {
             margin-top: 10px;
-            display: flex;
-            align-items: center;
+            position: relative;
             width: 200px;
-            justify-content: center;
         }
 
         #barraVida {
             height: 20px;
             background-color: #3498db;
-            width: 50%;
-            transition: width 0.5s;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #numeroVida1,
@@ -157,6 +166,7 @@
             font-size: 16px;
             font-weight: bold;
             color: #3498db;
+
         }
 
         #pokemonImagen1 img,
@@ -325,9 +335,11 @@
             <button id="mostrarValores">Mostrar Pokémons</button>
         </div>
 
-
         <p id="valoresMostrados"></p>
-        <button id="empezar">¡Empezar a luchar!</button>
+        <div id="botonEmpezar">
+            <button id="empezar">¡Empezar a luchar!</button>
+        </div>
+
     </div>
     <div id="combates">
         <div class="half">
