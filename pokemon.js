@@ -817,7 +817,7 @@ function mostrarVida() {
     if (pokemonsSeleccionados1[pokemonActual1].estadisticas.vida <= 0) {
         pokemonsSeleccionados1[pokemonActual1].estadisticas.vida = 0;
     } else if (pokemonsSeleccionados2[pokemonActual2].estadisticas.vida <= 0) {
-        pokemonsSeleccionados2[pokemonActual1].estadisticas.vida = 0;
+        pokemonsSeleccionados2[pokemonActual2].estadisticas.vida = 0;
     }
     var vida1 = document.getElementById("vida1");
     var vida2 = document.getElementById("vida2");
@@ -873,7 +873,10 @@ function ponerEstiloColor(pokemon) {
 }
 
 function eliminarImagenes() {
-    document.getElementById('pokemonImagen2').removeChild();
+    var contenedorImagen1 = document.getElementById('pokemonImagen1');
+    var contenedorImagen2 = document.getElementById('pokemonImagen2');
+    contenedorImagen1.removeChild(contenedorImagen1.firstChild);
+    contenedorImagen2.removeChild(contenedorImagen2.firstChild);
 }
 
 function mostrarImagenes() {
@@ -888,6 +891,7 @@ function mostrarImagenes() {
 }
 
 function listaAtaques(pokemon) {
+    document.getElementById(`ataques${iAtaque}`).innerHTML = '';
     console.log(pokemon.ataques[0].nombre)
     for (let i = 0; i < 4; i++) {
         document.getElementById(`ataques${iAtaque}`).innerHTML += `Ataque ${i + 1}:
@@ -934,13 +938,45 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     }
 
     if (contAccion == 0) {
+        let condicion1 = false;
+        let condicion2 = false;
+        console.log(pokemonDebilitado1)
+        console.log(pokemonDebilitado2)
         let nuevoPokemonIndex = parseInt(document.getElementById('accion').value);
         if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
-            && pokemonsSeleccionados2[nuevoPokemonIndex - 5].estado != "Debilitado") {
-            pokemonActual2 = nuevoPokemonIndex - 5;
+            && pokemonsSeleccionados1[nuevoPokemonIndex - 5].estado != "Debilitado"
+            && pokemonDebilitado1) {
+            alert("hola, pokemon debilitado es 1")
+            pokemonActual1 = nuevoPokemonIndex - 5;
+            eliminarImagenes();
             mostrarImagenes();
+            mostrarEstado();
+            mostrarAtaques();
+            mostrarVida();
+            mostrarPokemonsRestantes();
+            pokemonDebilitado1 = false;
         } else {
             console.error("Índice de nuevo Pokémon no válido");
+            condicion1 = true;
+        }
+
+        if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
+            && pokemonsSeleccionados2[nuevoPokemonIndex - 5].estado != "Debilitado"
+            && pokemonDebilitado2) {
+            alert("hola, pokemon debilitado es 2")
+            pokemonActual2 = nuevoPokemonIndex - 5;
+            eliminarImagenes();
+            mostrarImagenes();
+            mostrarEstado();
+            mostrarAtaques();
+            mostrarVida();
+            mostrarPokemonsRestantes();
+            pokemonDebilitado2 = false;
+        } else {
+            console.error("Índice de nuevo Pokémon no válido");
+            condicion2 = true;
+        }
+        if (condicion1 && condicion2){
             return;
         }
     }
@@ -999,14 +1035,22 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 });
 
 
+function esTipoEfectivo(tipoAtaque, tipoPokemon) {
+    for (let i = 0; i < tiposEfectivos.length; i++) {
+        if (pokemonTipo.includes(tiposEfectivos[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
-
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
-    console.log(ataque.inmunidad[0]);
-    console.log(pokemonUsuario2.tipo);
-    console.log(pokemonUsuario2.tipo.includes(ataque.inmunidad[0]));
+    console.log(ataque.tipo)
+    console.log(pokemonUsuario2.tipo)
+    console.log(esTipoEfectivo(pokemonUsuario2.tipo, ataque.tipo))
 
     if (ataque.poder == 0) {
         switch (ataque.nombre) {
@@ -1174,11 +1218,11 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     }
 
     if (pokemonUsuario1.estadisticas.vida <= 0 || pokemonUsuario2.estadisticas.vida <= 0) {
-        if (pokemonUsuario1.estadisticas.vida <= 0) {
-            pantalla.innerHTML = `El pokémon ${pokemonUsuario1.nombre} se ha debilitado<br>`;
-            pokemonUsuario1.estado = "Debilitado";
+        if (idJugador === 1) {
+            pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
+            pokemonUsuario2.estado = "Debilitado";
             contAccion = -1;
-            pokemonDebilitado1 = true;
+            pokemonDebilitado2 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
             //if (idJugador === 1) {
@@ -1190,7 +1234,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
             pokemonUsuario2.estado = "Debilitado";
             contAccion = -1;
-            pokemonDebilitado2 = true;
+            pokemonDebilitado1 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
             //if (idJugador === 1) {
