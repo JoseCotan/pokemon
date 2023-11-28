@@ -976,22 +976,51 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             console.error("Índice de nuevo Pokémon no válido");
             condicion2 = true;
         }
-        if (condicion1 && condicion2){
+        if (condicion1 && condicion2) {
             return;
         }
     }
 
     if (contAccion == 1) {
+        var valorJugador1Input = document.getElementById('accion')
         valorJugador1 = document.getElementById('accion').value - 1;
-        document.getElementById('accion').value = ''
+        console.log(valorJugador1)
+        if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
+            valorJugador1Input.value = '';
+            pantalla.innerHTML = "Introduce un número correcto."
+            return;
+        }
+        valorJugador1Input.value = ''
         pantalla.innerHTML = "Turno del Jugador 2";
         contAccion++
         return;
     } else if (contAccion == 2) {
+        var valorJugador2Input = document.getElementById('accion')
         valorJugador2 = document.getElementById('accion').value - 1;
-        document.getElementById('accion').value = ''
+        console.log(valorJugador2)
+        if (isNaN(valorJugador2) || parseInt(valorJugador2) < 0 || parseInt(valorJugador2) > 6) {
+            valorJugador2Input.value = '';
+            pantalla.innerHTML = "Introduce un número correcto."
+            return;
+        }
+        valorJugador2Input.value = ''
         contAccion++
+    } else if (contAccion == 3) {
+        if (valorJugador1 >= 4 && valorJugador1 <= 7) {
+            pokemonActual1 = valorJugador1 - 4;
+            eliminarImagenes();
+            mostrarImagenes();
+            mostrarEstado();
+            mostrarAtaques();
+            mostrarVida();
+            mostrarPokemonsRestantes();
+            console.log("entra");
+            pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}`
+            jugador1HaAtacado = true;
+            return;
+        }
     }
+
     if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
                                 ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
@@ -1036,8 +1065,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
 
 function esTipoEfectivo(tipoAtaque, tipoPokemon) {
-    for (let i = 0; i < tiposEfectivos.length; i++) {
-        if (pokemonTipo.includes(tiposEfectivos[i])) {
+    for (let i = 0; i < tipoAtaque.length; i++) {
+        if (tipoPokemon.includes(tipoAtaque[i])) {
             return true;
         }
     }
