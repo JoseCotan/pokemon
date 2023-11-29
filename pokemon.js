@@ -1005,22 +1005,35 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         }
         valorJugador2Input.value = ''
         contAccion++
-    } else if (contAccion == 3) {
-        if (valorJugador1 >= 4 && valorJugador1 <= 7) {
-            pokemonActual1 = valorJugador1 - 4;
-            eliminarImagenes();
-            mostrarImagenes();
-            mostrarEstado();
-            mostrarAtaques();
-            mostrarVida();
-            mostrarPokemonsRestantes();
-            console.log("entra");
-            pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}`
-            jugador1HaAtacado = true;
-            return;
-        }
     }
-
+    if (valorJugador1 >= 4 && valorJugador1 <= 7) {
+        pokemonActual1 = valorJugador1 - 4;
+        eliminarImagenes();
+        mostrarImagenes();
+        mostrarEstado();
+        mostrarAtaques();
+        mostrarVida();
+        mostrarPokemonsRestantes();
+        console.log("entra");
+        pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}`
+        valorJugador1 = 0;
+        jugador1HaAtacado = true;
+        return;
+    }
+    if (valorJugador2 >= 4 && valorJugador2 <= 7) {
+        pokemonActual2 = valorJugador2 - 4;
+        eliminarImagenes();
+        mostrarImagenes();
+        mostrarEstado();
+        mostrarAtaques();
+        mostrarVida();
+        mostrarPokemonsRestantes();
+        console.log("entra");
+        pantalla.innerHTML = `El jugador 2 cambió a ${pokemonsSeleccionados2[pokemonActual2].nombre}`
+        valorJugador2 = 0;
+        jugador2HaAtacado = true;
+        return
+    }
     if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
                                 ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
