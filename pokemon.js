@@ -1120,11 +1120,15 @@ function esTipoEfectivo(tipoAtaque, tipoPokemon) {
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
-    console.log(ataque.tipo)
-    console.log(pokemonUsuario2.tipo)
-    console.log(esTipoEfectivo(pokemonUsuario2.tipo, ataque.tipo))
+
 
     if (ataque.poder == 0) {
+        console.log(pokemonUsuario2.tipo.includes(ataque.inmunidad[0]))
+        if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
+            pantalla.innerHTML += "¡El pokémon es inmune!";
+            daño = 0;
+            return;
+        }
         switch (ataque.nombre) {
             case "Gruñido":
                 let iGruñido = encontrarPosicion(pokemonUsuario2.nombre);
