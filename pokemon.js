@@ -764,7 +764,7 @@ document.getElementById('empezar').addEventListener('click', function () {
 function mostrarEstado() {
     var estadoPokemon1 = document.getElementById("estadoPokemon1");
 
-    if (pokemonsSeleccionados2[pokemonActual2].estado === "Paralizado") {
+    if (pokemonsSeleccionados1[pokemonActual1].estado === "Paralizado") {
         estadoPokemon1.innerHTML = `Estado actual: <span style="color: yellow;">
                 ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
     } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Dormido") {
@@ -782,7 +782,7 @@ function mostrarEstado() {
     }
 
     var estadoPokemon2 = document.getElementById("estadoPokemon2");
-    if (pokemonsSeleccionados1[pokemonActual1].estado === "Paralizado") {
+    if (pokemonsSeleccionados2[pokemonActual2].estado === "Paralizado") {
         estadoPokemon2.innerHTML = `Estado actual:<span style="color: yellow;">
                             ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
     } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Dormido") {
