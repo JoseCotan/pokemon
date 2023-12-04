@@ -613,6 +613,7 @@ var contToxico = 1;
 var variar = [1.5, 2, 2.5, 3, 3.5, 4];
 const POKEMONS1 = structuredClone(pokemons);
 const POKEMONS2 = structuredClone(pokemons);
+const POKEMONS = structuredClone(pokemons);
 var pokemonsEstadisticasJugador1;
 var pokemonsEstadisticasJugador2;
 var valorJugador1;
@@ -730,9 +731,9 @@ limitarSeleccion(fieldset1, actualizarPokemonsSeleccionados1);
 limitarSeleccion(fieldset2, actualizarPokemonsSeleccionados2);
 
 function encontrarPosicion(nombrePokemon) {
-    let nombresPokemons = Object.keys(POKEMONS1);
+    let nombresPokemons = Object.keys(POKEMONS);
     for (let i = 0; i < nombresPokemons.length; i++) {
-        if (POKEMONS1[nombresPokemons[i]].nombre === nombrePokemon) {
+        if (POKEMONS[nombresPokemons[i]].nombre === nombrePokemon) {
             return i;
         }
     }
@@ -1135,7 +1136,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         switch (ataque.nombre) {
             case "Gruñido":
                 let iGruñido = encontrarPosicion(pokemonUsuario2.nombre);
-                let valorAtaqueGruñido = structuredClone(Object.values(POKEMONS1)[iGruñido].estadisticas.ataque)
+                let valorAtaqueGruñido = structuredClone(Object.values(POKEMONS)[iGruñido].estadisticas.ataque)
                 pokemonUsuario2.estadisticas.ataque = valorAtaqueGruñido /= variar[contGruñido]
                 contGruñido++;
                 console.log("---");
@@ -1204,7 +1205,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 break;
             case "Agilidad":
                 let iAgilidad = encontrarPosicion(pokemonUsuario1.nombre);
-                let valorVelocidadAgilidad = structuredClone(Object.values(POKEMONS1)[iAgilidad].estadisticas.velocidad)
+                let valorVelocidadAgilidad = structuredClone(Object.values(POKEMONS)[iAgilidad].estadisticas.velocidad)
                 pokemonUsuario1.estadisticas.velocidad = valorVelocidadAgilidad *= 1.5
                 contAgilidad += 2;
                 pantalla.innerHTML = pokemonUsuario1.estadisticas.velocidad;
@@ -1218,14 +1219,15 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                     pokemonUsuario1.estado = "Dormido";
                     pantalla.innerHTML += `¡El pokémon
                     ${pokemonUsuario1.nombre} se ha dormido!`;
-                    pokemonUsuario1.vida = structuredClone(Object.values(POKEMONS1)
-                        [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida)
-                    console.log(pokemonUsuario1.vida)
+                    console.log("Vida1" + pokemonUsuario1.estadisticas.vida);
+                    pokemonUsuario1.estadisticas.vida = Object.values(POKEMONS)
+                        [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida
+                    console.log("Vida2" + pokemonUsuario1.estadisticas.vida);
                     break;
                 }
             case "Tóxico":
                 let iToxico = encontrarPosicion(pokemonUsuario2.nombre);
-                let dañoToxico = (1.5 * 6.25 * Object.values(POKEMONS1)[iToxico].estadisticas.vida) / 100;
+                let dañoToxico = (1.5 * 6.25 * Object.values(POKEMONS)[iToxico].estadisticas.vida) / 100;
                 //contToxico++;
                 if (pokemonUsuario2.estado == "Envenenado") {
                     pantalla.innerHTML += `¡El pokémon
