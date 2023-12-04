@@ -920,13 +920,16 @@ function paralizado (pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Paralizado") {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
-    } else {
+    } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Paralizado";
         console.log(pokemonUsuario2.estadisticas.velocidad)
         pokemonUsuario2.estadisticas.velocidad *= 0.25;
         console.log(pokemonUsuario2.estadisticas.velocidad)
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} se ha paralizado!`
+    } else {
+        pantalla.innerHTML = `No se pudo paralizar, el pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`
     }
 }
 
@@ -962,7 +965,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
             && pokemonsSeleccionados1[nuevoPokemonIndex - 5].estado != "Debilitado"
             && pokemonDebilitado1) {
-            alert("hola, pokemon debilitado es 1")
             pokemonActual1 = nuevoPokemonIndex - 5;
             eliminarImagenes();
             mostrarImagenes();
@@ -979,7 +981,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
             && pokemonsSeleccionados2[nuevoPokemonIndex - 5].estado != "Debilitado"
             && pokemonDebilitado2) {
-            alert("hola, pokemon debilitado es 2")
             pokemonActual2 = nuevoPokemonIndex - 5;
             eliminarImagenes();
             mostrarImagenes();
