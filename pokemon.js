@@ -99,7 +99,7 @@ var ataques = {
         {
             nombre: "Canto", tipo: "Normal", poder: 0, usosRestantes: 15, precision: 55,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
-            inmunidad: INMUNIDAD.normal
+            inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     golpeCuerpo: [
@@ -193,7 +193,7 @@ var ataques = {
         {
             nombre: "Onda trueno", tipo: "Eléctrico", poder: 0, usosRestantes: 20, precision: 90,
             dobleTurno: 0, efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
-            inmunidad: INMUNIDAD.electrico
+            inmunidad: INMUNIDAD.electrico, tipoAtaque: "Especial"
         },
     ],
     ataqueAereo: [
@@ -214,7 +214,8 @@ var ataques = {
     movimientoSismico: [
         {
             nombre: "Movimiento sísmico", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
-            dobleTurno: 0
+            dobleTurno: 0, efectividad: EFECTIVIDAD.lucha, debilidad: DEBILIDAD.lucha,
+            inmunidad: INMUNIDAD.lucha, tipoAtaque: "Físico"
         }
     ],
     terremoto: [
@@ -234,13 +235,15 @@ var ataques = {
     agilidad: [
         {
             nombre: "Agilidad", tipo: "Psíquico", poder: 0, usosRestantes: 30, precision: 100,
-            dobleTurno: 0
+            dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
+            inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
     ],
     descanso: [
         {
             nombre: "Descanso", tipo: "Normal", poder: 0, usosRestantes: 10, precision: 100,
-            dobleTurno: 0
+            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     psiquico: [
@@ -254,7 +257,7 @@ var ataques = {
         {
             nombre: "Hipnosis", tipo: "Psíquico", poder: 0, usosRestantes: 20, precision: 60,
             dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
-            inmunidad: INMUNIDAD.psiquico
+            inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
     ],
     comeSuenyos: [
@@ -1214,7 +1217,10 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 } else {
                     pokemonUsuario1.estado = "Dormido";
                     pantalla.innerHTML += `¡El pokémon
-                    ${pokemonUsuario1.nombre} se ha dormido!`
+                    ${pokemonUsuario1.nombre} se ha dormido!`;
+                    pokemonUsuario1.vida = structuredClone(Object.values(POKEMONS1)
+                        [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida)
+                    console.log(pokemonUsuario1.vida)
                     break;
                 }
             case "Tóxico":
