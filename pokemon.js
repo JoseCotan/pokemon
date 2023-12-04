@@ -1205,10 +1205,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 fallido();
                 break;
             case "Agilidad":
-                let iAgilidad = encontrarPosicion(pokemonUsuario1.nombre);
-                let valorVelocidadAgilidad = structuredClone(Object.values(POKEMONS)[iAgilidad].estadisticas.velocidad)
-                pokemonUsuario1.estadisticas.velocidad = valorVelocidadAgilidad *= 1.5
-                contAgilidad += 2;
+                pokemonUsuario1.estadisticas.velocidad *= 1.5
                 pantalla.innerHTML = pokemonUsuario1.estadisticas.velocidad;
                 break;
             case "Descanso":
