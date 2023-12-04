@@ -764,7 +764,7 @@ document.getElementById('empezar').addEventListener('click', function () {
 function mostrarEstado() {
     var estadoPokemon1 = document.getElementById("estadoPokemon1");
 
-    if (comprobarParalizado1()) {
+    if (pokemonsSeleccionados2[pokemonActual2].estado === "Paralizado") {
         estadoPokemon1.innerHTML = `Estado actual: <span style="color: yellow;">
                 ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
     } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Dormido") {
@@ -782,7 +782,7 @@ function mostrarEstado() {
     }
 
     var estadoPokemon2 = document.getElementById("estadoPokemon2");
-    if (comprobarParalizado2()) {
+    if (pokemonsSeleccionados1[pokemonActual1].estado === "Paralizado") {
         estadoPokemon2.innerHTML = `Estado actual:<span style="color: yellow;">
                             ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
     } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Dormido") {
@@ -798,14 +798,6 @@ function mostrarEstado() {
         estadoPokemon2.innerHTML = `Estado actual:
                 ${pokemonsSeleccionados2[pokemonActual2].estado}.`;
     }
-}
-
-function comprobarParalizado1() {
-    return pokemonsSeleccionados1[pokemonActual1].estado === "Paralizado";
-}
-
-function comprobarParalizado2() {
-    return pokemonsSeleccionados2[pokemonActual2].estado === "Paralizado";
 }
 
 function mostrarAtaques() {
@@ -912,6 +904,26 @@ function precision(valor) {
 
 function fallido() {
     pantalla.innerHTML = "¡El ataque ha fallado!";
+}
+
+
+
+function dormido () {
+
+}
+
+function paralizado (pokemonUsuario2) {
+    if (pokemonUsuario2.estado == "Paralizado") {
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
+    } else {
+        pokemonUsuario2.estado = "Paralizado";
+        console.log(pokemonUsuario2.estadisticas.velocidad)
+        pokemonUsuario2.estadisticas.velocidad *= 0.25;
+        console.log(pokemonUsuario2.estadisticas.velocidad)
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} se ha paralizado!`
+    }
 }
 
 var contAccion = 1;
@@ -1171,34 +1183,15 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 break;
             case "Deslumbrar":
                 if (precision(ataque.precision)) {
-                    if (pokemonUsuario2.estado == "Paralizado") {
-                        pantalla.innerHTML += `¡El pokémon
-                        ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
-                        break
-                    } else {
-                        pokemonUsuario2.estado = "Paralizado";
-                        console.log(pokemonUsuario2.estadisticas.velocidad)
-                        pokemonUsuario2.estadisticas.velocidad *= 0.25;
-                        console.log(pokemonUsuario2.estadisticas.velocidad)
-                        pantalla.innerHTML += `¡El pokémon
-                        ${pokemonUsuario2.nombre} se ha paralizado!`
-                        break;
-                    }
+                    paralizado(pokemonUsuario2);
+                    break;
                 }
                 fallido();
                 break;
             case "Onda trueno":
                 if (precision(ataque.precision)) {
-                    if (pokemonUsuario2.estado == "Paralizado") {
-                        pantalla.innerHTML += `¡El pokémon
-                        ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
-                        break
-                    } else {
-                        pokemonUsuario2.estado = "Paralizado";
-                        pantalla.innerHTML += `¡El pokémon
-                        ${pokemonUsuario2.nombre} se ha paralizado!`
-                        break;
-                    }
+                    paralizado(pokemonUsuario2);
+                    break;
                 }
                 fallido();
                 break;
