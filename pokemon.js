@@ -928,7 +928,7 @@ function paralizado (pokemonUsuario2) {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} se ha paralizado!`
     } else {
-        pantalla.innerHTML = `No se pudo paralizar, el pokémon ya se encuentra
+        pantalla.innerHTML += `No se pudo paralizar, el pokémon ya se encuentra
             ${pokemonUsuario2.estado.toLowerCase()}`
     }
 }
@@ -1233,12 +1233,13 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 if (pokemonUsuario2.estado == "Envenenado") {
                     pantalla.innerHTML += `¡El pokémon
                     ${pokemonUsuario2.nombre} ya se encuentra envenenado!`
-                    break
-                } else {
+                } else if (pokemonUsuario1.estado == "Normal") {
                     pokemonUsuario2.estado = "Envenenado";
                     pantalla.innerHTML += `¡El pokémon
                     ${pokemonUsuario2.nombre} se ha envenenado!`
-                    break;
+                } else {
+                    pantalla.innerHTML += `No se pudo envenenar, el pokémon
+                    ya se encuentra ${pokemonUsuario2.estado.toLowerCase()}`;
                 }
 
         }
