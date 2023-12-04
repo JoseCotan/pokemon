@@ -1034,7 +1034,25 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         jugador2HaAtacado = true;
         return
     }
-    if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
+
+    console.log("Ataque = " + pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre)
+    if (pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre == "Ataque Rápido"
+        && !jugador1HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+        atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
+            valorJugador1, 1);
+        jugador1HaAtacado = true;
+        return;
+    } else if (pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre == "Ataque Rápido"
+        && !jugador2HaAtacado) {
+        pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 2
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+        atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
+            valorJugador2, 2);
+        jugador2HaAtacado = true;
+        return;
+    } else if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
                                 ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
         atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
@@ -1159,6 +1177,9 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                         break
                     } else {
                         pokemonUsuario2.estado = "Paralizado";
+                        console.log(pokemonUsuario2.estadisticas.velocidad)
+                        pokemonUsuario2.estadisticas.velocidad *= 0.25;
+                        console.log(pokemonUsuario2.estadisticas.velocidad)
                         pantalla.innerHTML += `¡El pokémon
                         ${pokemonUsuario2.nombre} se ha paralizado!`
                         break;
