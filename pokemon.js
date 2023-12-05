@@ -819,7 +819,6 @@ function mostrarVida() {
     var vida2 = document.getElementById("vida2");
     var numeroVida1 = document.getElementById("numeroVida1");
     var numeroVida2 = document.getElementById("numeroVida2");
-    console.log(pokemons)
     var anchoBarra = (pokemonsSeleccionados1[pokemonActual1].estadisticas.vida / pokemonsEstadisticasJugador1[pokemonActual1].estadisticas.vida) * 100;
     vida1.style.width = anchoBarra + '%';
 
@@ -888,7 +887,6 @@ function mostrarImagenes() {
 
 function listaAtaques(pokemon) {
     document.getElementById(`ataques${iAtaque}`).innerHTML = '';
-    console.log(pokemon.ataques[0].nombre)
     for (let i = 0; i < 4; i++) {
         document.getElementById(`ataques${iAtaque}`).innerHTML += `Ataque ${i + 1}:
             ${pokemon.ataques[i].nombre} --- Usos restantes:
@@ -922,9 +920,7 @@ function paralizado (pokemonUsuario2) {
         ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Paralizado";
-        console.log(pokemonUsuario2.estadisticas.velocidad)
         pokemonUsuario2.estadisticas.velocidad *= 0.25;
-        console.log(pokemonUsuario2.estadisticas.velocidad)
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} se ha paralizado!`
     } else {
@@ -959,8 +955,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     if (contAccion == 0) {
         let condicion1 = false;
         let condicion2 = false;
-        console.log(pokemonDebilitado1)
-        console.log(pokemonDebilitado2)
         let nuevoPokemonIndex = parseInt(document.getElementById('accion').value);
         if ((nuevoPokemonIndex == 5 || nuevoPokemonIndex == 6 || nuevoPokemonIndex == 7)
             && pokemonsSeleccionados1[nuevoPokemonIndex - 5].estado != "Debilitado"
@@ -1001,7 +995,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     if (contAccion == 1) {
         var valorJugador1Input = document.getElementById('accion')
         valorJugador1 = document.getElementById('accion').value - 1;
-        console.log(valorJugador1)
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
             valorJugador1Input.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
@@ -1014,7 +1007,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     } else if (contAccion == 2) {
         var valorJugador2Input = document.getElementById('accion')
         valorJugador2 = document.getElementById('accion').value - 1;
-        console.log(valorJugador2)
         if (isNaN(valorJugador2) || parseInt(valorJugador2) < 0 || parseInt(valorJugador2) > 6) {
             valorJugador2Input.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
@@ -1031,7 +1023,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarAtaques();
         mostrarVida();
         mostrarPokemonsRestantes();
-        console.log("entra");
         pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}`
         valorJugador1 = 0;
         jugador1HaAtacado = true;
@@ -1045,14 +1036,12 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarAtaques();
         mostrarVida();
         mostrarPokemonsRestantes();
-        console.log("entra");
         pantalla.innerHTML = `El jugador 2 cambió a ${pokemonsSeleccionados2[pokemonActual2].nombre}`
         valorJugador2 = 0;
         jugador2HaAtacado = true;
         return
     }
 
-    console.log("Ataque = " + pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre)
     if (pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre == "Ataque Rápido"
         && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
@@ -1106,9 +1095,6 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     jugador1HaAtacado = jugador2HaAtacado = false;
     contAccion = 1;
     pantalla.innerHTML = "Turno del Jugador 1";
-
-    console.log(valorJugador1)
-
 });
 
 
@@ -1126,9 +1112,15 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
 
+    if (pokemonUsuario1.estado == "Paralizado") {
+        if (Math.floor(Math.random() * 101) > 75) {
+            pantalla.innerHTML = `¡El pokémon ${pokemonUsuario1.nombre}
+            se encuentra paralizado!`;
+            return;
+        }
+    }
 
     if (ataque.poder == 0) {
-        console.log(pokemonUsuario2.tipo.includes(ataque.inmunidad[0]))
         if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
             pantalla.innerHTML += "¡El pokémon es inmune!";
             daño = 0;
@@ -1140,8 +1132,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 let valorAtaqueGruñido = structuredClone(Object.values(POKEMONS)[iGruñido].estadisticas.ataque)
                 pokemonUsuario2.estadisticas.ataque = valorAtaqueGruñido /= variar[contGruñido]
                 contGruñido++;
-                console.log("---");
-                console.log(pokemonsEstadisticasJugador2[0].estadisticas.ataque);
                 pantalla.innerHTML += `¡El Ataque de
                                 ${pokemonUsuario2.nombre} ha sido reducido!`
                 break;
@@ -1217,10 +1207,8 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                     pokemonUsuario1.estado = "Dormido";
                     pantalla.innerHTML += `¡El pokémon
                     ${pokemonUsuario1.nombre} se ha dormido!`;
-                    console.log("Vida1" + pokemonUsuario1.estadisticas.vida);
                     pokemonUsuario1.estadisticas.vida = Object.values(POKEMONS)
                         [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida
-                    console.log("Vida2" + pokemonUsuario1.estadisticas.vida);
                     break;
                 }
             case "Tóxico":
@@ -1245,19 +1233,15 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         switch (ataque.nombre) {
             case "Movimiento sísmico":
                 pokemonUsuario2.estadisticas.vida -= 100;
-                console.log(pokemonUsuario2.estadisticas.vida)
                 break;
             case "Super diente":
                 if (pokemonUsuario2.estadisticas.vida < 2) {
                     pokemonUsuario2.estadisticas.vida = 0;
-                    console.log(pokemonUsuario2.estadisticas.vida)
                     break;
                 }
                 pokemonUsuario2.estadisticas.vida /= 2;
-                console.log(pokemonUsuario2.estadisticas.vida)
                 break;
         }
-        console.log(pokemonsSeleccionados1, pokemonsSeleccionados2)
     }
     else if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
         pantalla.innerHTML += "¡El pokémon es inmune!";
@@ -1267,8 +1251,8 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         if (precision(ataque.precision)) {
             let daño = 0.01 *                                                      // 0.01
                 (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *            // B
-                ((ataque.efectividad.includes(pokemonUsuario2.tipo)) ? 2 :                // E
-                    (ataque.debilidad.includes(pokemonUsuario2.tipo)) ? 0.5 : 1) *        // E
+                (ataque.efectividad.some(tipo => pokemonUsuario2.tipo.includes(tipo)) ? 2 :                // E
+                  (ataque.debilidad.some(tipo => pokemonUsuario2.tipo.includes(tipo))) ? 0.5 : 1) *        // E
                 (Math.floor(Math.random() * (16) + 85)) *                          // V
                 (
                     (21 * (ataque.tipoAtaque == "Físico" ?
@@ -1283,7 +1267,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             fallido();
         }
     }
-
     if (pokemonUsuario1.estadisticas.vida <= 0 || pokemonUsuario2.estadisticas.vida <= 0) {
         if (idJugador === 1) {
             pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
