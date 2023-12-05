@@ -777,6 +777,12 @@ function mostrarEstado() {
     } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Envenenado") {
         estadoPokemon1.innerHTML = `Estado actual:<span style="color: purple;">
                 ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
+    } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Quemado") {
+        estadoPokemon1.innerHTML = `Estado actual:<span style="color: red;">
+                ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
+    } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Congelado") {
+        estadoPokemon1.innerHTML = `Estado actual:<span style="color: lightblue;">
+                ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
     } else if (pokemonsSeleccionados1[pokemonActual1].estado === "Debilitado") {
         estadoPokemon1.innerHTML = `Estado actual:<span style="color: dimgray;">
                 ${pokemonsSeleccionados1[pokemonActual1].estado}</span>.`;
@@ -794,6 +800,12 @@ function mostrarEstado() {
                 ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
     } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Envenenado") {
         estadoPokemon2.innerHTML = `Estado actual:<span style="color: purple;">
+                        ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
+    } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Quemado") {
+        estadoPokemon2.innerHTML = `Estado actual:<span style="color: red;">
+                        ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
+    } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Congelado") {
+        estadoPokemon2.innerHTML = `Estado actual:<span style="color: lightblue;">
                         ${pokemonsSeleccionados2[pokemonActual2].estado}</span>.`;
     } else if (pokemonsSeleccionados2[pokemonActual2].estado === "Debilitado") {
         estadoPokemon2.innerHTML = `Estado actual:<span style="color: dimgray;">
@@ -860,6 +872,10 @@ function ponerEstiloColor(pokemon) {
         return "color: cyan;";
     } else if (pokemon.estado === "Envenenado") {
         return "color: purple;";
+    } else if (pokemon.estado === "Quemado") {
+        return "color: red;";
+    } else if (pokemon.estado === "Congelado") {
+        return "color: lightblue;";
     } else if (pokemon.estado === "Debilitado") {
         return "color: dimgray;";
     } else {
@@ -905,7 +921,7 @@ function precision(valor) {
 }
 
 function fallido() {
-    pantalla.innerHTML = "¡El ataque ha fallado!";
+    pantalla.innerHTML = "¡El ataque ha fallado!<br>";
 }
 
 
@@ -926,6 +942,62 @@ function paralizado (pokemonUsuario2) {
     } else {
         pantalla.innerHTML += `No se pudo paralizar, el pokémon ya se encuentra
             ${pokemonUsuario2.estado.toLowerCase()}`
+    }
+}
+
+function envenenado (pokemonUsuario2) {
+    if (pokemonUsuario2.estado == "Envenenado") {
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra envenenado!`
+    } else if (pokemonUsuario2.estado === "Normal") {
+        pokemonUsuario2.estado = "Envenenado";
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} se ha envenenado!`
+    } else {
+        pantalla.innerHTML += `No se pudo envenenar, el pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`
+    }
+}
+
+function quemado (pokemonUsuario2) {
+    if (pokemonUsuario2.estado == "Quemado") {
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra quemado!`
+    } else if (pokemonUsuario2.estado === "Normal") {
+        pokemonUsuario2.estado = "Quemado";
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} se ha quemado!`
+    } else {
+        pantalla.innerHTML += `No se pudo quemar, el pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`
+    }
+}
+
+function congelado (pokemonUsuario2) {
+    if (pokemonUsuario2.estado == "Congelado") {
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra congelado!`
+    } else if (pokemonUsuario2.estado === "Normal") {
+        pokemonUsuario2.estado = "Congelado";
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} se ha congelado!`
+    } else {
+        pantalla.innerHTML += `No se pudo congelar, el pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`
+    }
+}
+
+
+function efectos (tipoAtaque, pokemonUsuario) {
+    switch (tipoAtaque.tipo) {
+        case "Fuego":
+            if (Math.floor(Math.random() * 101) > 90) {
+                quemado(pokemonUsuario);
+            }
+        case "Hielo":
+            if (Math.floor(Math.random() * 101) > 90) {
+                congelado(pokemonUsuario);
+            }
     }
 }
 
@@ -1094,7 +1166,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
     jugador1HaAtacado = jugador2HaAtacado = false;
     contAccion = 1;
-    pantalla.innerHTML = "Turno del Jugador 1";
+    pantalla.innerHTML += "Turno del Jugador 1";
 });
 
 
@@ -1212,20 +1284,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                     break;
                 }
             case "Tóxico":
-                let iToxico = encontrarPosicion(pokemonUsuario2.nombre);
-                let dañoToxico = (1.5 * 6.25 * Object.values(POKEMONS)[iToxico].estadisticas.vida) / 100;
+
                 //contToxico++;
-                if (pokemonUsuario2.estado == "Envenenado") {
-                    pantalla.innerHTML += `¡El pokémon
-                    ${pokemonUsuario2.nombre} ya se encuentra envenenado!`
-                } else if (pokemonUsuario1.estado == "Normal") {
-                    pokemonUsuario2.estado = "Envenenado";
-                    pantalla.innerHTML += `¡El pokémon
-                    ${pokemonUsuario2.nombre} se ha envenenado!`
-                } else {
-                    pantalla.innerHTML += `No se pudo envenenar, el pokémon
-                    ya se encuentra ${pokemonUsuario2.estado.toLowerCase()}`;
+                if (precision(ataque.precision)) {
+                    envenenado(pokemonUsuario2);
+                    break;
                 }
+                fallido();
+                break;
 
         }
     }
@@ -1295,6 +1361,13 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         }
 
     }
+    if (pokemonUsuario1.estado === "Envenenado") {
+        let iToxico = encontrarPosicion(pokemonUsuario1.nombre);
+        let dañoToxico = (1.5 * 6.25 * Object.values(POKEMONS)[iToxico].estadisticas.vida) / 100;
+        pokemonUsuario1.estadisticas.vida -= dañoToxico;
+        pantalla.innerHTML += "¡El Pokémon se ve afectado por el veneno!"
+    }
+    efectos(ataque, pokemonUsuario2);
     mostrarEstado();
     mostrarVida();
     mostrarPokemonsRestantes();
