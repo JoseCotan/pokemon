@@ -83,14 +83,14 @@ var ataques = {
     ],
     hiperRayo: [
         {
-            nombre: "Hiper rayo", tipo: "Normal", poder: 150, usosRestantes: 5, precision: 90,
+            nombre: "Hiper Rayo", tipo: "Normal", poder: 150, usosRestantes: 5, precision: 90,
             dobleTurno: 1, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     superDiente: [
         {
-            nombre: "Super diente", tipo: "Normal", poder: 1, usosRestantes: 10, precision: 90,
+            nombre: "Super Diente", tipo: "Normal", poder: 1, usosRestantes: 10, precision: 90,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
@@ -112,7 +112,7 @@ var ataques = {
     ],
     megaPatada: [
         {
-            nombre: "Mega patada", tipo: "Normal", poder: 120, usosRestantes: 5, precision: 75,
+            nombre: "Mega Patada", tipo: "Normal", poder: 120, usosRestantes: 5, precision: 75,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
@@ -126,7 +126,7 @@ var ataques = {
     ],
     dobleFilo: [
         {
-            nombre: "Doble filo", tipo: "Normal", poder: 120, usosRestantes: 15, precision: 100,
+            nombre: "Doble Filo", tipo: "Normal", poder: 120, usosRestantes: 15, precision: 100,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, efectoSecundario: "Retroceso", porcentajeEfecto: 25,
             tipoAtaque: "Físico"
@@ -134,7 +134,7 @@ var ataques = {
     ],
     megaPunyo: [
         {
-            nombre: "Mega puño", tipo: "Normal", poder: 80, usosRestantes: 20, precision: 85,
+            nombre: "Mega Puño", tipo: "Normal", poder: 80, usosRestantes: 20, precision: 85,
             dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         }
@@ -162,7 +162,7 @@ var ataques = {
     ],
     hidroBomba: [
         {
-            nombre: "Hidro bomba", tipo: "Agua", poder: 110, usosRestantes: 5, precision: 80,
+            nombre: "Hidro Bomba", tipo: "Agua", poder: 110, usosRestantes: 5, precision: 80,
             dobleTurno: 0, efectividad: EFECTIVIDAD.agua, debilidad: DEBILIDAD.agua,
             inmunidad: INMUNIDAD.agua, tipoAtaque: "Especial"
         }
@@ -191,14 +191,14 @@ var ataques = {
     ],
     ondaTrueno: [
         {
-            nombre: "Onda trueno", tipo: "Eléctrico", poder: 0, usosRestantes: 20, precision: 90,
+            nombre: "Onda Trueno", tipo: "Eléctrico", poder: 0, usosRestantes: 20, precision: 90,
             dobleTurno: 0, efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
             inmunidad: INMUNIDAD.electrico, tipoAtaque: "Especial"
         },
     ],
     ataqueAereo: [
         {
-            nombre: "Ataque aéreo", tipo: "Volador", poder: 140, usosRestantes: 5, precision: 90,
+            nombre: "Ataque Aéreo", tipo: "Volador", poder: 140, usosRestantes: 5, precision: 90,
             dobleTurno: 2, efectividad: EFECTIVIDAD.volador, debilidad: DEBILIDAD.volador,
             inmunidad: INMUNIDAD.volador, tipoAtaque: "Físico"
         },
@@ -213,7 +213,7 @@ var ataques = {
     ],
     movimientoSismico: [
         {
-            nombre: "Movimiento sísmico", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
+            nombre: "Movimiento Sísmico", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
             dobleTurno: 0, efectividad: EFECTIVIDAD.lucha, debilidad: DEBILIDAD.lucha,
             inmunidad: INMUNIDAD.lucha, tipoAtaque: "Físico"
         }
@@ -256,13 +256,6 @@ var ataques = {
     hipnosis: [
         {
             nombre: "Hipnosis", tipo: "Psíquico", poder: 0, usosRestantes: 20, precision: 60,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
-            inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
-        },
-    ],
-    comeSuenyos: [
-        {
-            nombre: "Come sueños", tipo: "Psíquico", poder: 100, usosRestantes: 15, precision: 100,
             dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
             inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
@@ -511,7 +504,7 @@ var pokemons = {
         ataques: [
             ...ataques.psiquico,
             ...ataques.hipnosis,
-            ...ataques.comeSuenyos,
+            ...ataques.golpeCuerpo,
             ...ataques.explosion,
         ],
         estadisticas: {
@@ -1285,7 +1278,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 }
                 fallido();
                 break;
-            case "Onda trueno":
+            case "Onda Trueno":
                 if (precision(ataque.precision)) {
                     paralizado(pokemonUsuario2);
                     break;
@@ -1323,10 +1316,10 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     }
     else if (ataque.poder == 1) {
         switch (ataque.nombre) {
-            case "Movimiento sísmico":
+            case "Movimiento Sísmico":
                 pokemonUsuario2.estadisticas.vida -= 100;
                 break;
-            case "Super diente":
+            case "Super Diente":
                 if (pokemonUsuario2.estadisticas.vida < 2) {
                     pokemonUsuario2.estadisticas.vida = 0;
                     break;
@@ -1355,10 +1348,37 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                         pokemonUsuario2.estadisticas.defensaEspecial)) + 2
                 )
             pokemonUsuario2.estadisticas.vida -= daño
+            if (ataque.nombre === "Doble Filo") {
+                pokemonUsuario1.estadisticas.vida -= (daño * 0.25);
+                pantalla.innerHTML += `¡El pokémon ${pokemonUsuario1.nombre}
+                                    se ve afectado por Doble Filo!<br>`;
+                if (pokemonUsuario1.estadisticas.vida <= 0) {
+                    pokemonUsuario1.estado = "Debilitado";
+                    pantalla.innerHTML += `¡El pokémon ${pokemonUsuario1.nombre}
+                    se ha debilitado!`;
+                    if (idJugador === 1) {
+                        contAccion = -1;
+                        pokemonDebilitado1 = true;
+                        jugador1HaAtacado = true;
+                        jugador2HaAtacado = true;
+                    } else {
+                        contAccion = -1;
+                        pokemonDebilitado2 = true;
+                        jugador1HaAtacado = true;
+                        jugador2HaAtacado = true;
+                    }
+                }
+                efectos(ataque, pokemonUsuario2);
+                mostrarEstado();
+                mostrarVida();
+                mostrarPokemonsRestantes();
+                return;
+            }
         } else {
             fallido();
         }
     }
+
     if (pokemonUsuario1.estadisticas.vida <= 0 || pokemonUsuario2.estadisticas.vida <= 0) {
         if (idJugador === 1) {
             pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
@@ -1367,11 +1387,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             pokemonDebilitado2 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
-            //if (idJugador === 1) {
-            //    pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
-            //} else {
-            //    pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
-            //}
         } else {
             pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
             pokemonUsuario2.estado = "Debilitado";
@@ -1379,11 +1394,6 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             pokemonDebilitado1 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
-            //if (idJugador === 1) {
-            //   pantalla.innerHTML += `Jugador 2 --> Selecciona el nuevo Pokémon.`;
-            //} else {
-            //    pantalla.innerHTML += `Jugador 1 --> Selecciona el nuevo Pokémon.`;
-            //}
         }
 
     }
@@ -1397,11 +1407,4 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     mostrarEstado();
     mostrarVida();
     mostrarPokemonsRestantes();
-}
-
-function mostrar() {
-    var textoOculto = document.getElementById("textoOculto");
-    textoOculto.style.display = "none";
-    inicial.style.display = "block";
-    document.getElementById("botonInicial").style.display = "none";
 }
