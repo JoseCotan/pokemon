@@ -927,11 +927,11 @@ function fallido() {
 
 
 
-function dormido () {
+function dormido() {
 
 }
 
-function paralizado (pokemonUsuario2) {
+function paralizado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Paralizado") {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
@@ -946,7 +946,7 @@ function paralizado (pokemonUsuario2) {
     }
 }
 
-function envenenado (pokemonUsuario2) {
+function envenenado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Envenenado") {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} ya se encuentra envenenado!`
@@ -960,7 +960,7 @@ function envenenado (pokemonUsuario2) {
     }
 }
 
-function quemado (pokemonUsuario2) {
+function quemado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Quemado") {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} ya se encuentra quemado!`
@@ -974,7 +974,7 @@ function quemado (pokemonUsuario2) {
     }
 }
 
-function congelado (pokemonUsuario2) {
+function congelado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Congelado") {
         pantalla.innerHTML += `¡El pokémon
         ${pokemonUsuario2.nombre} ya se encuentra congelado!`
@@ -989,7 +989,7 @@ function congelado (pokemonUsuario2) {
 }
 
 
-function efectos (tipoAtaque, pokemonUsuario) {
+function efectos(tipoAtaque, pokemonUsuario) {
     switch (tipoAtaque.tipo) {
         case "Fuego":
             if (Math.floor(Math.random() * 101) > 90) {
@@ -1067,10 +1067,19 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
 
     if (contAccion == 1) {
         valorJugador1 = document.getElementById('accion').value - 1;
+        console.log(valorJugador1)
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
             accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
             return;
+        }
+        if (parseInt(valorJugador1) > 3 && parseInt(valorJugador1) < 7) {
+            console.log(valorJugador1)
+            console.log(pokemonsSeleccionados1[valorJugador1 - 4].estado)
+            if (pokemonsSeleccionados1[valorJugador1 - 4].estado === "Debilitado") {
+                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 1"
+                return;
+            }
         }
         accion.value = ''
         pantalla.innerHTML = "Turno del Jugador 2";
@@ -1280,7 +1289,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                     pantalla.innerHTML += `¡El pokémon
                     ${pokemonUsuario1.nombre} se ha dormido!`;
                     pokemonUsuario1.estadisticas.vida = Object.values(POKEMONS)
-                        [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida
+                    [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida
                     break;
                 }
             case "Tóxico":
@@ -1318,7 +1327,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             let daño = 0.01 *                                                      // 0.01
                 (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *            // B
                 (ataque.efectividad.some(tipo => pokemonUsuario2.tipo.includes(tipo)) ? 2 :                // E
-                  (ataque.debilidad.some(tipo => pokemonUsuario2.tipo.includes(tipo))) ? 0.5 : 1) *        // E
+                    (ataque.debilidad.some(tipo => pokemonUsuario2.tipo.includes(tipo))) ? 0.5 : 1) *        // E
                 (Math.floor(Math.random() * (16) + 85)) *                          // V
                 (
                     (21 * (ataque.tipoAtaque == "Físico" ?
