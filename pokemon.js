@@ -1068,9 +1068,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     }
 
     if (contAccion == 1) {
-        console.log(pokemonActual1)
         valorJugador1 = document.getElementById('accion').value - 1;
-        console.log(valorJugador1)
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
             accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
@@ -1098,6 +1096,18 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
             return;
+        }
+        if (parseInt(valorJugador2) > 3 && parseInt(valorJugador2) < 7) {
+            if (valorJugador2 - 4 == pokemonActual2) {
+                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 2";
+                accion.value = ''
+                return;
+            }
+            if (pokemonsSeleccionados2[valorJugador2 - 4].estado === "Debilitado") {
+                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 2";
+                accion.value = ''
+                return;
+            }
         }
         accion.value = ''
         contAccion++
