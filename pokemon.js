@@ -921,7 +921,18 @@ function fallido() {
 
 
 function dormido() {
-
+    if (pokemonUsuario2.estado == "Dormido") {
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra dormido!`
+    } else if (pokemonUsuario2.estado === "Normal") {
+        pokemonUsuario2.estado = "Dormido";
+        pokemonUsuario2.estadisticas.velocidad *= 0.25;
+        pantalla.innerHTML += `¡El pokémon
+        ${pokemonUsuario2.nombre} se ha dormido!`
+    } else {
+        pantalla.innerHTML += `No se pudo dormir, el pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`
+    }
 }
 
 function paralizado(pokemonUsuario2) {
@@ -1006,6 +1017,7 @@ function compararVelocidad(pokemon1, pokemon2) {
         if (Math.floor(Math.random() * 101) > 50) {
             return pokemon1.estadisticas.velocidad < pokemon2.estadisticas.velocidad;
         }
+
     }
     return pokemon1.estadisticas.velocidad > pokemon2.estadisticas.velocidad;
 }
@@ -1294,7 +1306,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 break;
             case "Agilidad":
                 pokemonUsuario1.estadisticas.velocidad *= 1.5
-                pantalla.innerHTML = pokemonUsuario1.estadisticas.velocidad;
+                pantalla.innerHTML += `${pokemonUsuario1.nombre} aumentó su velocidad`;
                 break;
             case "Descanso":
                 if (pokemonUsuario1.estado == "Dormido") {
@@ -1354,7 +1366,11 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                         pokemonUsuario2.estadisticas.defensa :
                         pokemonUsuario2.estadisticas.defensaEspecial)) + 2
                 )
+
+
             pokemonUsuario2.estadisticas.vida -= daño
+
+
             if (ataque.nombre === "Doble Filo") {
                 pokemonUsuario1.estadisticas.vida -= (daño * 0.25);
                 pantalla.innerHTML += `¡El pokémon ${pokemonUsuario1.nombre}
