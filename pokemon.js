@@ -1041,7 +1041,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             mostrarPokemonsRestantes();
             pokemonDebilitado1 = false;
         } else {
-            console.error("Índice de nuevo Pokémon no válido");
+            pantalla.innerHTML = "Número introducido no es válido";
+            accion.value = '';
             condicion1 = true;
         }
 
@@ -1057,7 +1058,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             mostrarPokemonsRestantes();
             pokemonDebilitado2 = false;
         } else {
-            console.error("Índice de nuevo Pokémon no válido");
+            pantalla.innerHTML = "Número introducido no es válido";
+            accion.value = '';
             condicion2 = true;
         }
         if (condicion1 && condicion2) {
@@ -1066,6 +1068,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     }
 
     if (contAccion == 1) {
+        console.log(pokemonActual1)
         valorJugador1 = document.getElementById('accion').value - 1;
         console.log(valorJugador1)
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
@@ -1074,10 +1077,14 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             return;
         }
         if (parseInt(valorJugador1) > 3 && parseInt(valorJugador1) < 7) {
-            console.log(valorJugador1)
-            console.log(pokemonsSeleccionados1[valorJugador1 - 4].estado)
+            if (valorJugador1 - 4 == pokemonActual1) {
+                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 1";
+                accion.value = ''
+                return;
+            }
             if (pokemonsSeleccionados1[valorJugador1 - 4].estado === "Debilitado") {
-                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 1"
+                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 1";
+                accion.value = ''
                 return;
             }
         }
