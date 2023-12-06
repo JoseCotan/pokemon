@@ -599,6 +599,7 @@ var menu1 = document.getElementById('menu1');
 var menu2 = document.getElementById('menu2');
 var menu3 = document.getElementById('menu3');
 var pantalla = document.getElementById('pantalla');
+var accion = document.getElementById('accion');
 var pokemonsSeleccionados1 = [];
 var pokemonsSeleccionados2 = [];
 var pokemonInicial1 = 0;
@@ -1065,26 +1066,24 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     }
 
     if (contAccion == 1) {
-        var valorJugador1Input = document.getElementById('accion')
         valorJugador1 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
-            valorJugador1Input.value = '';
+            accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
             return;
         }
-        valorJugador1Input.value = ''
+        accion.value = ''
         pantalla.innerHTML = "Turno del Jugador 2";
         contAccion++
         return;
     } else if (contAccion == 2) {
-        var valorJugador2Input = document.getElementById('accion')
         valorJugador2 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador2) || parseInt(valorJugador2) < 0 || parseInt(valorJugador2) > 6) {
-            valorJugador2Input.value = '';
+            accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto."
             return;
         }
-        valorJugador2Input.value = ''
+        accion.value = ''
         contAccion++
     }
     if (valorJugador1 >= 4 && valorJugador1 <= 7) {
@@ -1165,8 +1164,9 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     }
 
     jugador1HaAtacado = jugador2HaAtacado = false;
+    accion.value = '';
     contAccion = 1;
-    pantalla.innerHTML += "Turno del Jugador 1";
+    pantalla.innerHTML = "Turno del Jugador 1";
 });
 
 
