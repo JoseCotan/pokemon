@@ -1002,6 +1002,11 @@ var pokemonDebilitado1 = false;
 var pokemonDebilitado2 = false;
 
 function compararVelocidad(pokemon1, pokemon2) {
+    if (pokemon1.estadisticas.velocidad === pokemon2.estadisticas.velocidad) {
+        if (Math.floor(Math.random() * 101) > 50) {
+            return pokemon1.estadisticas.velocidad < pokemon2.estadisticas.velocidad;
+        }
+    }
     return pokemon1.estadisticas.velocidad > pokemon2.estadisticas.velocidad;
 }
 
@@ -1202,6 +1207,8 @@ function esTipoEfectivo(tipoAtaque, tipoPokemon) {
 function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
     let daño = 0;
     let ataque = pokemonUsuario1.ataques[idAtaque];
+    console.log(ataque.usosRestantes)
+    ataque.usosRestantes--;
 
     if (pokemonUsuario1.estado == "Paralizado") {
         if (Math.floor(Math.random() * 101) > 75) {
@@ -1403,6 +1410,8 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         pokemonUsuario1.estadisticas.vida -= dañoToxico;
         pantalla.innerHTML += "¡El Pokémon se ve afectado por el veneno!"
     }
+
+    mostrarAtaques();
     efectos(ataque, pokemonUsuario2);
     mostrarEstado();
     mostrarVida();
