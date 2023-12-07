@@ -13,7 +13,7 @@ const EFECTIVIDAD = {
     fantasma: ["Fantasma", "Psíquico"],
     hielo: ["Planta", "Tierra", "Volador"],
     lucha: ["Hielo", "Normal", "Roca"]
-}
+};
 
 const DEBILIDAD = {
     normal: ["Roca"],
@@ -30,7 +30,7 @@ const DEBILIDAD = {
     fantasma: [],
     hielo: ["Agua", "Fuego", "Hielo"],
     lucha: ["Bicho", "Psíquico", "Veneno", "Volador"]
-}
+};
 
 const INMUNIDAD = {
     normal: ["Fantasma"],
@@ -47,65 +47,53 @@ const INMUNIDAD = {
     fantasma: [],
     hielo: [],
     lucha: ["Fantasma"]
-}
+};
 
 const TIPOS_ATAQUE = {
     fisico: ["Normal", "Volador", "Veneno", "Tierra", "Roca", "Lucha", "Fantasma", "Bicho"],
     especial: ["Psíquico", "Planta", "Hielo", "Fuego", "Eléctrico", "Agua"]
-}
-
-const COLORES_ESTADOS = {
-
-}
-
+};
 
 var ataques = {
     gruñido: [
         {
             nombre: "Gruñido", tipo: "Normal", poder: 0, usosRestantes: 40, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     cabezazo: [
         {
-            nombre: "Cabezazo", tipo: "Normal", poder: 130, usosRestantes: 10, precision: 100,
-            dobleTurno: 2, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            nombre: "Cabezazo", tipo: "Normal", poder: 100, usosRestantes: 10, precision: 100,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     ataqueRapido: [
         {
             nombre: "Ataque Rápido", tipo: "Normal", poder: 40, usosRestantes: 30, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
-            inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
-        },
-    ],
-    hiperRayo: [
-        {
-            nombre: "Hiper Rayo", tipo: "Normal", poder: 150, usosRestantes: 5, precision: 90,
-            dobleTurno: 1, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     superDiente: [
         {
             nombre: "Super Diente", tipo: "Normal", poder: 1, usosRestantes: 10, precision: 90,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     canto: [
         {
             nombre: "Canto", tipo: "Normal", poder: 0, usosRestantes: 15, precision: 55,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     golpeCuerpo: [
         {
             nombre: "Golpe Cuerpo", tipo: "Normal", poder: 85, usosRestantes: 15, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, efectoSecundario: "Paralizar", porcentajeEfecto: 30,
             tipoAtaque: "Físico"
         },
@@ -113,21 +101,21 @@ var ataques = {
     megaPatada: [
         {
             nombre: "Mega Patada", tipo: "Normal", poder: 120, usosRestantes: 5, precision: 75,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     cuchillada: [
         {
             nombre: "Cuchillada", tipo: "Normal", poder: 70, usosRestantes: 20, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     dobleFilo: [
         {
             nombre: "Doble Filo", tipo: "Normal", poder: 120, usosRestantes: 15, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, efectoSecundario: "Retroceso", porcentajeEfecto: 25,
             tipoAtaque: "Físico"
         },
@@ -135,56 +123,56 @@ var ataques = {
     megaPunyo: [
         {
             nombre: "Mega Puño", tipo: "Normal", poder: 80, usosRestantes: 20, precision: 85,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         }
     ],
     explosion: [
         {
             nombre: "Explosión", tipo: "Normal", poder: 250, usosRestantes: 5, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     deslumbrar: [
         {
             nombre: "Deslumbrar", tipo: "Normal", poder: 0, usosRestantes: 30, precision: 75,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     surf: [
         {
             nombre: "Surf", tipo: "Agua", poder: 90, usosRestantes: 15, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.agua, debilidad: DEBILIDAD.agua,
+            efectividad: EFECTIVIDAD.agua, debilidad: DEBILIDAD.agua,
             inmunidad: INMUNIDAD.agua, tipoAtaque: "Especial"
         },
     ],
     hidroBomba: [
         {
             nombre: "Hidro Bomba", tipo: "Agua", poder: 110, usosRestantes: 5, precision: 80,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.agua, debilidad: DEBILIDAD.agua,
+            efectividad: EFECTIVIDAD.agua, debilidad: DEBILIDAD.agua,
             inmunidad: INMUNIDAD.agua, tipoAtaque: "Especial"
         }
     ],
     somnifero: [
         {
             nombre: "Somnífero", tipo: "Planta", poder: 0, usosRestantes: 15, precision: 80,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.planta, debilidad: DEBILIDAD.planta,
+            efectividad: EFECTIVIDAD.planta, debilidad: DEBILIDAD.planta,
             inmunidad: INMUNIDAD.planta, tipoAtaque: "Especial"
         },
     ],
-    rayoSolar: [
+    hojaAfilada: [
         {
-            nombre: "Rayo Solar", tipo: "Planta", poder: 120, usosRestantes: 10, precision: 100,
-            dobleTurno: 2, efectividad: EFECTIVIDAD.planta, debilidad: DEBILIDAD.planta,
+            nombre: "Hoja Afilada", tipo: "Planta", poder: 65, usosRestantes: 40, precision: 95,
+            efectividad: EFECTIVIDAD.planta, debilidad: DEBILIDAD.planta,
             inmunidad: INMUNIDAD.planta, tipoAtaque: "Especial"
         }
     ],
     lanzallamas: [
         {
             nombre: "Lanzallamas", tipo: "Fuego", poder: 90, usosRestantes: 15, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.fuego, debilidad: DEBILIDAD.fuego,
+            efectividad: EFECTIVIDAD.fuego, debilidad: DEBILIDAD.fuego,
             inmunidad: INMUNIDAD.fuego, efectoSecundario: "Quemar", porcentajeEfecto: 10,
             tipoAtaque: "Especial"
         }
@@ -192,21 +180,21 @@ var ataques = {
     ondaTrueno: [
         {
             nombre: "Onda Trueno", tipo: "Eléctrico", poder: 0, usosRestantes: 20, precision: 90,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
+            efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
             inmunidad: INMUNIDAD.electrico, tipoAtaque: "Especial"
         },
     ],
-    ataqueAereo: [
+    ataqueAla: [
         {
-            nombre: "Ataque Aéreo", tipo: "Volador", poder: 140, usosRestantes: 5, precision: 90,
-            dobleTurno: 2, efectividad: EFECTIVIDAD.volador, debilidad: DEBILIDAD.volador,
+            nombre: "Ataque Ala", tipo: "Volador", poder: 50, usosRestantes: 35, precision: 100,
+            efectividad: EFECTIVIDAD.volador, debilidad: DEBILIDAD.volador,
             inmunidad: INMUNIDAD.volador, tipoAtaque: "Físico"
         },
     ],
     rayo: [
         {
             nombre: "Rayo", tipo: "Eléctrico", poder: 90, usosRestantes: 15, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
+            efectividad: EFECTIVIDAD.electrico, debilidad: DEBILIDAD.electrico,
             inmunidad: INMUNIDAD.electrico, efectoSecundario: "Paralizar", porcentajeEfecto: 10,
             tipoAtaque: "Especial"
         },
@@ -214,63 +202,63 @@ var ataques = {
     movimientoSismico: [
         {
             nombre: "Movimiento Sísmico", tipo: "Lucha", poder: 1, usosRestantes: 20, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.lucha, debilidad: DEBILIDAD.lucha,
+            efectividad: EFECTIVIDAD.lucha, debilidad: DEBILIDAD.lucha,
             inmunidad: INMUNIDAD.lucha, tipoAtaque: "Físico"
         }
     ],
     terremoto: [
         {
             nombre: "Terremoto", tipo: "Tierra", poder: 100, usosRestantes: 10, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.tierra, debilidad: DEBILIDAD.tierra,
+            efectividad: EFECTIVIDAD.tierra, debilidad: DEBILIDAD.tierra,
             inmunidad: INMUNIDAD.tierra, tipoAtaque: "Físico"
         }
     ],
     avalancha: [
         {
             nombre: "Avalancha", tipo: "Roca", poder: 75, usosRestantes: 10, precision: 90,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.roca, debilidad: DEBILIDAD.roca,
+            efectividad: EFECTIVIDAD.roca, debilidad: DEBILIDAD.roca,
             inmunidad: INMUNIDAD.roca, tipoAtaque: "Físico"
         }
     ],
     agilidad: [
         {
             nombre: "Agilidad", tipo: "Psíquico", poder: 0, usosRestantes: 30, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
+            efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
             inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
     ],
     descanso: [
         {
             nombre: "Descanso", tipo: "Normal", poder: 0, usosRestantes: 10, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
+            efectividad: EFECTIVIDAD.normal, debilidad: DEBILIDAD.normal,
             inmunidad: INMUNIDAD.normal, tipoAtaque: "Físico"
         },
     ],
     psiquico: [
         {
             nombre: "Psíquico", tipo: "Psíquico", poder: 90, usosRestantes: 10, precision: 100,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
+            efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
             inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
     ],
     hipnosis: [
         {
             nombre: "Hipnosis", tipo: "Psíquico", poder: 0, usosRestantes: 20, precision: 60,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
+            efectividad: EFECTIVIDAD.psiquico, debilidad: DEBILIDAD.psiquico,
             inmunidad: INMUNIDAD.psiquico, tipoAtaque: "Especial"
         },
     ],
     ventisca: [
         {
             nombre: "Ventisca", tipo: "Hielo", poder: 110, usosRestantes: 5, precision: 70,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.hielo, debilidad: DEBILIDAD.hielo,
+            efectividad: EFECTIVIDAD.hielo, debilidad: DEBILIDAD.hielo,
             inmunidad: INMUNIDAD.hielo, tipoAtaque: "Especial"
         },
     ],
     toxico: [
         {
             nombre: "Tóxico", tipo: "Veneno", poder: 0, usosRestantes: 10, precision: 90,
-            dobleTurno: 0, efectividad: EFECTIVIDAD.veneno, debilidad: DEBILIDAD.veneno,
+            efectividad: EFECTIVIDAD.veneno, debilidad: DEBILIDAD.veneno,
             inmunidad: INMUNIDAD.veneno, tipoAtaque: "Físico"
         },
     ]
@@ -305,7 +293,7 @@ var pokemons = {
             ...ataques.golpeCuerpo,
             ...ataques.somnifero,
             ...ataques.toxico,
-            ...ataques.rayoSolar,
+            ...ataques.hojaAfilada,
         ],
         estadisticas: {
             vida: 294,
@@ -364,7 +352,7 @@ var pokemons = {
         ataques: [
             ...ataques.agilidad,
             ...ataques.dobleFilo,
-            ...ataques.ataqueAereo,
+            ...ataques.ataqueAla,
             ...ataques.ataqueRapido,
         ],
         estadisticas: {
@@ -564,7 +552,7 @@ var pokemons = {
         ataques: [
             ...ataques.agilidad,
             ...ataques.dobleFilo,
-            ...ataques.hiperRayo,
+            ...ataques.toxico,
             ...ataques.cuchillada,
         ],
         estadisticas: {
@@ -604,6 +592,8 @@ var iAtaque = 1;
 var contGruñido = 0;
 var contAgilidad = 1;
 var contToxico = 1;
+var contDescando1 = false;
+var contDescando2 = false;
 var variar = [1.5, 2, 2.5, 3, 3.5, 4];
 const POKEMONS1 = structuredClone(pokemons);
 const POKEMONS2 = structuredClone(pokemons);
@@ -748,7 +738,7 @@ document.getElementById('empezar').addEventListener('click', function () {
     menu1.style.display = 'flex';
     menu2.style.display = 'flex';
     menu3.style.display = 'flex';
-    pantalla.innerHTML = 'Turno del Jugador 1'
+    pantalla.innerHTML = 'Turno del Jugador 1.';
     document.getElementById('inicial').innerHTML = '';
 
     mostrarVida();
@@ -922,73 +912,73 @@ function fallido() {
 
 function dormido() {
     if (pokemonUsuario2.estado == "Dormido") {
-        pantalla.innerHTML += `¡El pokémon
+        pantalla.innerHTML += `¡El Pokémon
         ${pokemonUsuario2.nombre} ya se encuentra dormido!`
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Dormido";
         pokemonUsuario2.estadisticas.velocidad *= 0.25;
-        pantalla.innerHTML += `¡El pokémon
+        pantalla.innerHTML += `¡El Pokémon
         ${pokemonUsuario2.nombre} se ha dormido!`
     } else {
-        pantalla.innerHTML += `No se pudo dormir, el pokémon ya se encuentra
+        pantalla.innerHTML += `No se pudo dormir, el Pokémon ya se encuentra
             ${pokemonUsuario2.estado.toLowerCase()}`
     }
 }
 
 function paralizado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Paralizado") {
-        pantalla.innerHTML += `¡El pokémon
+        pantalla.innerHTML += `¡El Pokémon
         ${pokemonUsuario2.nombre} ya se encuentra paralizado!`
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Paralizado";
         pokemonUsuario2.estadisticas.velocidad *= 0.25;
-        pantalla.innerHTML += `¡El pokémon
+        pantalla.innerHTML += `¡El Pokémon
         ${pokemonUsuario2.nombre} se ha paralizado!`
     } else {
-        pantalla.innerHTML += `No se pudo paralizar, el pokémon ya se encuentra
+        pantalla.innerHTML += `No se pudo paralizar, el Pokémon ya se encuentra
             ${pokemonUsuario2.estado.toLowerCase()}`
     }
 }
 
 function envenenado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Envenenado") {
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} ya se encuentra envenenado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra envenenado!`;
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Envenenado";
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} se ha envenenado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} se ha envenenado!`;
     } else {
-        pantalla.innerHTML += `No se pudo envenenar, el pokémon ya se encuentra
-            ${pokemonUsuario2.estado.toLowerCase()}`
+        pantalla.innerHTML += `No se pudo envenenar, el Pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`;
     }
 }
 
 function quemado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Quemado") {
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} ya se encuentra quemado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra quemado!`;
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Quemado";
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} se ha quemado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} se ha quemado!`;
     } else {
-        pantalla.innerHTML += `No se pudo quemar, el pokémon ya se encuentra
-            ${pokemonUsuario2.estado.toLowerCase()}`
+        pantalla.innerHTML += `No se pudo quemar, el Pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`;
     }
 }
 
 function congelado(pokemonUsuario2) {
     if (pokemonUsuario2.estado == "Congelado") {
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} ya se encuentra congelado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} ya se encuentra congelado!`;
     } else if (pokemonUsuario2.estado === "Normal") {
         pokemonUsuario2.estado = "Congelado";
-        pantalla.innerHTML += `¡El pokémon
-        ${pokemonUsuario2.nombre} se ha congelado!`
+        pantalla.innerHTML += `¡El Pokémon
+        ${pokemonUsuario2.nombre} se ha congelado!`;
     } else {
-        pantalla.innerHTML += `No se pudo congelar, el pokémon ya se encuentra
-            ${pokemonUsuario2.estado.toLowerCase()}`
+        pantalla.innerHTML += `No se pudo congelar, el Pokémon ya se encuentra
+            ${pokemonUsuario2.estado.toLowerCase()}`;
     }
 }
 
@@ -1051,7 +1041,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             mostrarPokemonsRestantes();
             pokemonDebilitado1 = false;
         } else {
-            pantalla.innerHTML = "Número introducido no es válido";
+            pantalla.innerHTML = "Número introducido no es válido.<br>\
+            Selecciona el nuevo pokemon.";
             accion.value = '';
             condicion1 = true;
         }
@@ -1068,10 +1059,12 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             mostrarPokemonsRestantes();
             pokemonDebilitado2 = false;
         } else {
-            pantalla.innerHTML = "Número introducido no es válido";
+            pantalla.innerHTML = "Número introducido no es válido.<br>\
+            Selecciona el nuevo pokemon.";
             accion.value = '';
             condicion2 = true;
         }
+
         if (condicion1 && condicion2) {
             return;
         }
@@ -1081,40 +1074,42 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         valorJugador1 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador1) || parseInt(valorJugador1) < 0 || parseInt(valorJugador1) > 6) {
             accion.value = '';
-            pantalla.innerHTML = "Introduce un número correcto."
+            pantalla.innerHTML = "Introduce un número correcto.<br>\
+                                    Turno del Jugador 1."
             return;
         }
         if (parseInt(valorJugador1) > 3 && parseInt(valorJugador1) < 7) {
             if (valorJugador1 - 4 == pokemonActual1) {
-                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 1";
+                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 1.";
                 accion.value = ''
                 return;
             }
             if (pokemonsSeleccionados1[valorJugador1 - 4].estado === "Debilitado") {
-                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 1";
+                pantalla.innerHTML = "¡El Pokémon está debilitado!<br>Turno del Jugador 1.";
                 accion.value = ''
                 return;
             }
         }
         accion.value = ''
-        pantalla.innerHTML = "Turno del Jugador 2";
+        pantalla.innerHTML = "Turno del Jugador 2.";
         contAccion++
         return;
     } else if (contAccion == 2) {
         valorJugador2 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador2) || parseInt(valorJugador2) < 0 || parseInt(valorJugador2) > 6) {
             accion.value = '';
-            pantalla.innerHTML = "Introduce un número correcto."
+            pantalla.innerHTML = "Introduce un número correcto.<br>\
+                                    Turno del Jugador 2."
             return;
         }
         if (parseInt(valorJugador2) > 3 && parseInt(valorJugador2) < 7) {
             if (valorJugador2 - 4 == pokemonActual2) {
-                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 2";
+                pantalla.innerHTML = "¡No puedes cambiar al mismo Pokémon!<br>Turno del Jugador 2.";
                 accion.value = ''
                 return;
             }
             if (pokemonsSeleccionados2[valorJugador2 - 4].estado === "Debilitado") {
-                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 2";
+                pantalla.innerHTML = "¡El pokémon está debilitado!<br>Turno del Jugador 2.";
                 accion.value = ''
                 return;
             }
@@ -1130,7 +1125,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarAtaques();
         mostrarVida();
         mostrarPokemonsRestantes();
-        pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}`
+        pantalla.innerHTML = `El jugador 1 cambió a ${pokemonsSeleccionados1[pokemonActual1].nombre}.`
         valorJugador1 = 0;
         jugador1HaAtacado = true;
         return;
@@ -1143,7 +1138,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarAtaques();
         mostrarVida();
         mostrarPokemonsRestantes();
-        pantalla.innerHTML = `El jugador 2 cambió a ${pokemonsSeleccionados2[pokemonActual2].nombre}`
+        pantalla.innerHTML = `El jugador 2 cambió a ${pokemonsSeleccionados2[pokemonActual2].nombre}.`
         valorJugador2 = 0;
         jugador2HaAtacado = true;
         return
@@ -1152,7 +1147,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     if (pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre == "Ataque Rápido"
         && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
-                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}.<br>`
         atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
             valorJugador1, 1);
         jugador1HaAtacado = true;
@@ -1160,14 +1155,14 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     } else if (pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre == "Ataque Rápido"
         && !jugador2HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 2
-                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}.<br>`
         atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
             valorJugador2, 2);
         jugador2HaAtacado = true;
         return;
     } else if (compararVelocidad(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2]) && !jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
-                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}.<br>`
         atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
             valorJugador1, 1);
         console.log("El jugador 1 acaba de atacar, siendo más rápido que el jugador 2")
@@ -1175,7 +1170,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         return;
     } else if (compararVelocidad(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1]) && !jugador2HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 2
-                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}.<br>`
         atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
             valorJugador2, 2);
         console.log("El jugador 2 acaba de atacar, siendo más rápido que el jugador 1")
@@ -1183,7 +1178,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         return;
     } else if (!jugador1HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados1[pokemonActual1].nombre} del Jugador 1
-                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre}.<br>`
         atacar(pokemonsSeleccionados1[pokemonActual1], pokemonsSeleccionados2[pokemonActual2],
             valorJugador1, 1);
         console.log("El jugador 1 acaba de atacar, siendo menos rápido que el jugador 2")
@@ -1191,7 +1186,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         return;
     } else if (!jugador2HaAtacado) {
         pantalla.innerHTML = `El Pokémon ${pokemonsSeleccionados2[pokemonActual2].nombre} del Jugador 2
-                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}<br>`
+                                ha usado ${pokemonsSeleccionados2[pokemonActual2].ataques[valorJugador2].nombre}.<br>`
         atacar(pokemonsSeleccionados2[pokemonActual2], pokemonsSeleccionados1[pokemonActual1],
             valorJugador2, 2);
         console.log("El jugador 2 acaba de atacar, siendo menos rápido que el jugador 1")
@@ -1202,7 +1197,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     jugador1HaAtacado = jugador2HaAtacado = false;
     accion.value = '';
     contAccion = 1;
-    pantalla.innerHTML = "Turno del Jugador 1";
+    pantalla.innerHTML = "Turno del Jugador 1.";
 });
 
 
@@ -1224,15 +1219,41 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
 
     if (pokemonUsuario1.estado == "Paralizado") {
         if (Math.floor(Math.random() * 101) > 75) {
-            pantalla.innerHTML = `¡El pokémon ${pokemonUsuario1.nombre}
+            pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
             se encuentra paralizado!`;
+            return;
+        }
+    }
+
+    if (pokemonUsuario1.estado == "Dormido") {
+        if (idJugador === 1 && contDescando1) {
+            pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
+            sigue dormido!`;
+            contDescando1 = false;
+            return;
+        } else if (idJugador === 2 && contDescando2) {
+            pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
+            sigue dormido!`;
+            contDescando2 = false;
+            return;
+        }
+        if (Math.floor(Math.random() * 101) > 101) {
+            pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
+            sigue dormido!`;
+            return;
+        } else {
+            pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
+            despertó!`;
+            pokemonUsuario1.estado = "Normal";
+            mostrarEstado();
+            mostrarPokemonsRestantes();
             return;
         }
     }
 
     if (ataque.poder == 0) {
         if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
-            pantalla.innerHTML += "¡El pokémon es inmune!";
+            pantalla.innerHTML += "¡El Pokémon es inmune!";
             daño = 0;
             return;
         }
@@ -1248,12 +1269,12 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             case "Canto":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} se ha dormido!`
                         break;
                     }
@@ -1263,12 +1284,12 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             case "Somnífero":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} se ha dormido!`
                         break;
                     }
@@ -1278,12 +1299,12 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
             case "Hipnosis":
                 if (precision(ataque.precision)) {
                     if (pokemonUsuario2.estado == "Dormido") {
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} ya se encuentra dormido!`
                         break
                     } else {
                         pokemonUsuario2.estado = "Dormido";
-                        pantalla.innerHTML += `¡El pokémon
+                        pantalla.innerHTML += `¡El Pokémon
                         ${pokemonUsuario2.nombre} se ha dormido!`
                         break;
                     }
@@ -1310,15 +1331,20 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 break;
             case "Descanso":
                 if (pokemonUsuario1.estado == "Dormido") {
-                    pantalla.innerHTML += `¡El pokémon
+                    pantalla.innerHTML += `¡El Pokémon
                     ${pokemonUsuario1.nombre} ya se encuentra dormido!`
                     break
                 } else {
                     pokemonUsuario1.estado = "Dormido";
-                    pantalla.innerHTML += `¡El pokémon
+                    pantalla.innerHTML += `¡El Pokémon
                     ${pokemonUsuario1.nombre} se ha dormido!`;
                     pokemonUsuario1.estadisticas.vida = Object.values(POKEMONS)
                     [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida
+                    if (idJugador === 1) {
+                        contDescando1 = 1;
+                    } else {
+                        contDescando2 = 1;
+                    }
                     break;
                 }
             case "Tóxico":
@@ -1348,16 +1374,16 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         }
     }
     else if (pokemonUsuario2.tipo.includes(ataque.inmunidad[0])) {
-        pantalla.innerHTML += "¡El pokémon es inmune!";
+        pantalla.innerHTML += "¡El Pokémon es inmune!";
         daño = 0;
     }
     else {
         if (precision(ataque.precision)) {
-            let daño = 0.01 *                                                      // 0.01
-                (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *            // B
-                (ataque.efectividad.some(tipo => pokemonUsuario2.tipo.includes(tipo)) ? 2 :                // E
-                    (ataque.debilidad.some(tipo => pokemonUsuario2.tipo.includes(tipo))) ? 0.5 : 1) *        // E
-                (Math.floor(Math.random() * (16) + 85)) *                          // V
+            let daño = 0.01 *
+                (pokemonUsuario1.tipo.includes(ataque.tipo) ? 1.5 : 1) *
+                (ataque.efectividad.some(tipo => pokemonUsuario2.tipo.includes(tipo)) ? 2 :
+                    (ataque.debilidad.some(tipo => pokemonUsuario2.tipo.includes(tipo))) ? 0.5 : 1) *
+                (Math.floor(Math.random() * (16) + 85)) *
                 (
                     (21 * (ataque.tipoAtaque == "Físico" ?
                         pokemonUsuario1.estadisticas.ataque * ataque.poder :
@@ -1367,35 +1393,33 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                         pokemonUsuario2.estadisticas.defensaEspecial)) + 2
                 )
 
-
-            pokemonUsuario2.estadisticas.vida -= daño
-
+            pokemonUsuario2.estadisticas.vida -= daño;
 
             if (ataque.nombre === "Doble Filo") {
                 pokemonUsuario1.estadisticas.vida -= (daño * 0.25);
-                pantalla.innerHTML += `¡El pokémon ${pokemonUsuario1.nombre}
+                pantalla.innerHTML += `¡El Pokémon ${pokemonUsuario1.nombre}
                                     se ve afectado por Doble Filo!<br>`;
                 if (pokemonUsuario1.estadisticas.vida <= 0) {
                     pokemonUsuario1.estado = "Debilitado";
-                    pantalla.innerHTML += `¡El pokémon ${pokemonUsuario1.nombre}
+                    pantalla.innerHTML += `¡El Pokémon ${pokemonUsuario1.nombre}
                     se ha debilitado!`;
                     if (idJugador === 1) {
                         contAccion = -1;
                         pokemonDebilitado1 = true;
                         jugador1HaAtacado = true;
                         jugador2HaAtacado = true;
-                    } else {
+                    } else if (idJugador === 2) {
                         contAccion = -1;
                         pokemonDebilitado2 = true;
                         jugador1HaAtacado = true;
                         jugador2HaAtacado = true;
                     }
+                    efectos(ataque, pokemonUsuario2);
+                    mostrarEstado();
+                    mostrarVida();
+                    mostrarPokemonsRestantes();
+                    return;
                 }
-                efectos(ataque, pokemonUsuario2);
-                mostrarEstado();
-                mostrarVida();
-                mostrarPokemonsRestantes();
-                return;
             }
         } else {
             fallido();
@@ -1404,14 +1428,14 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
 
     if (pokemonUsuario1.estadisticas.vida <= 0 || pokemonUsuario2.estadisticas.vida <= 0) {
         if (idJugador === 1) {
-            pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
+            pantalla.innerHTML = `El Pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
             pokemonUsuario2.estado = "Debilitado";
             contAccion = -1;
             pokemonDebilitado2 = true;
             jugador1HaAtacado = true;
             jugador2HaAtacado = true;
         } else {
-            pantalla.innerHTML = `El pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
+            pantalla.innerHTML = `El Pokémon ${pokemonUsuario2.nombre} se ha debilitado<br>`;
             pokemonUsuario2.estado = "Debilitado";
             contAccion = -1;
             pokemonDebilitado1 = true;
@@ -1424,9 +1448,8 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         let iToxico = encontrarPosicion(pokemonUsuario1.nombre);
         let dañoToxico = (1.5 * 6.25 * Object.values(POKEMONS)[iToxico].estadisticas.vida) / 100;
         pokemonUsuario1.estadisticas.vida -= dañoToxico;
-        pantalla.innerHTML += "¡El Pokémon se ve afectado por el veneno!"
+        pantalla.innerHTML += "<br>¡El Pokémon se ve afectado por el veneno!";
     }
-
     mostrarAtaques();
     efectos(ataque, pokemonUsuario2);
     mostrarEstado();
