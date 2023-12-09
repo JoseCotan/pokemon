@@ -601,12 +601,8 @@ var pokemonActual1 = 0;
 var pokemonActual2 = 0;
 var jugadorActual = 1;
 var iAtaque = 1;
-var contGruñido = 0;
-var contAgilidad = 1;
-var contToxico = 1;
-var contDescando1 = false;
-var contDescando2 = false;
-var variar = [1.5, 2, 2.5, 3, 3.5, 4];
+var contDescanso1 = false;
+var contDescanso2 = false;
 const POKEMONS1 = structuredClone(pokemons);
 const POKEMONS2 = structuredClone(pokemons);
 const POKEMONS = structuredClone(pokemons);
@@ -621,6 +617,10 @@ menuPantalla.style.display = 'none';
 menuInput.style.display = 'none';
 menuBoton.style.display = 'none';
 reiniciar.style.display = 'none';
+
+reiniciar.addEventListener('click', function() {
+    location.reload();
+});
 
 
 document.getElementById('mostrarValores').addEventListener('click', function () {
@@ -1180,6 +1180,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarPokemonsRestantes();
         pantalla.innerHTML = `El jugador 1 cambió a
                               ${pokemonsSeleccionados1[pokemonActual1].nombre}.`;
+        contDescanso1 = false;
         valorJugador1 = 0;
         jugador1HaAtacado = true;
         return;
@@ -1194,6 +1195,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         mostrarPokemonsRestantes();
         pantalla.innerHTML = `El jugador 2 cambió a
                               ${pokemonsSeleccionados2[pokemonActual2].nombre}.`;
+        contDescanso2 = false;
         valorJugador2 = 0;
         jugador2HaAtacado = true;
         return
@@ -1298,15 +1300,15 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
         }
     }
     if (pokemonUsuario1.estado === "Dormido") {
-        if (idJugador === 1 && contDescando1) {
+        if (idJugador === 1 && contDescanso1) {
             pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
             sigue dormido!`;
-            contDescando1 = false;
+            contDescanso1 = false;
             return;
-        } else if (idJugador === 2 && contDescando2) {
+        } else if (idJugador === 2 && contDescanso2) {
             pantalla.innerHTML = `¡El Pokémon ${pokemonUsuario1.nombre}
             sigue dormido!`;
-            contDescando2 = false;
+            contDescanso2 = false;
             return;
         }
         if (Math.floor(Math.random() * 101) > 60) {
@@ -1333,8 +1335,7 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                 let valorAtaqueGruñido =
                     structuredClone(Object.values(POKEMONS)[iGruñido].estadisticas.ataque);
                 pokemonUsuario2.estadisticas.ataque = valorAtaqueGruñido
-                    /= variar[contGruñido];
-                contGruñido++;
+                    *= 0.75;
                 pantalla.innerHTML += `¡El Ataque de
                                 ${pokemonUsuario2.nombre} ha sido reducido!`;
                 break;
@@ -1390,9 +1391,9 @@ function atacar(pokemonUsuario1, pokemonUsuario2, idAtaque, idJugador) {
                     pokemonUsuario1.estadisticas.vida = Object.values(POKEMONS)
                     [encontrarPosicion(pokemonUsuario1.nombre)].estadisticas.vida;
                     if (idJugador === 1) {
-                        contDescando1 = 1;
+                        contDescanso1 = true;
                     } else {
-                        contDescando2 = 1;
+                        contDescanso2 = true;
                     }
                     break;
                 }
