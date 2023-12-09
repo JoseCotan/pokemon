@@ -123,17 +123,17 @@
             overflow: auto;
         }
 
-        #menu1 {
+        #menuPantalla {
             display: flex;
             overflow: auto;
         }
 
-        #menu2 {
+        #menuInput {
             display: flex;
             overflow: auto;
         }
 
-        #menu3 {
+        #menuBoton {
             display: flex;
             overflow: auto;
         }
@@ -200,7 +200,8 @@
             text-align: center;
         }
 
-        #hacerAccion {
+        #hacerAccion,
+        #reiniciar {
             padding: 10px 20px;
             font-size: 16px;
             font-weight: bold;
@@ -216,7 +217,8 @@
             border: 2px solid #3498db;
         }
 
-        #hacerAccion:hover {
+        #hacerAccion:hover,
+        #reiniciar {
             background-color: #2980b9;
             border-color: #2980b9;
         }
@@ -242,7 +244,7 @@
             <label for="charmander1"><img src="imagenes/charmander.png" alt="Charmander"></label>
 
             <input type="checkbox" id="squirtle1" name="pokemonJugador1" value="3">
-            <label for="squirtle1"><img src="imagenes/vamo a calmarno.png" alt="Squirtle"></label>
+            <label for="squirtle1"><img src="imagenes/squirtle.png" alt="Squirtle"></label>
 
             <input type="checkbox" id="pidgeotto1" name="pokemonJugador1" value="4">
             <label for="pidgeotto1"><img src="imagenes/pidgeotto.png" alt="Pidgeotto"></label>
@@ -293,7 +295,7 @@
             <label for="charmander2"><img src="imagenes/charmander.png" alt="Charmander"></label>
 
             <input type="checkbox" id="squirtle2" name="pokemonJugador2" value="3">
-            <label for="squirtle2"><img src="imagenes/vamo a calmarno.png" alt="Squirtle"></label>
+            <label for="squirtle2"><img src="imagenes/squirtle.png" alt="Squirtle"></label>
 
             <input type="checkbox" id="pidgeotto2" name="pokemonJugador2" value="4">
             <label for="pidgeotto2"><img src="imagenes/pidgeotto.png" alt="Pidgeotto"></label>
@@ -364,14 +366,17 @@
         </div>
     </div>
 
-    <div id="menu1">
+    <div id="menuPantalla">
         <div id="pantalla"></div>
     </div>
-    <div id="menu2">
+    <div id="menuInput">
         <input type="password" id="accion">
     </div>
-    <div id="menu3">
+    <div id="menuBoton">
         <button id="hacerAccion">Acción</button>
+    </div>
+    <div id="menu4">
+        <button id="reiniciar">Reiniciar</button>
     </div>
     <script src="pokemon.js"></script>
 
