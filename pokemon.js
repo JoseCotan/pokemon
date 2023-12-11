@@ -670,7 +670,7 @@ function actualizarPokemonsSeleccionados2() {
     // Se inicia como un array vacío.
     pokemonsSeleccionados2 = [];
     var checkboxes =
-    // Selecciona todas las casillas de verificación con el nombre "pokemonJugador1" que estén marcadas.
+    // Selecciona todas las casillas de verificación con el nombre "pokemonJugador2" que estén marcadas.
         document.querySelectorAll('input[name="pokemonJugador2"]:checked');
 
     // Itera sobre cada casilla de verificación marcada.
