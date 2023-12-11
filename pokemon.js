@@ -1123,6 +1123,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     // El jugador ha sido avisado que necesita sacar un nuevo Pokémon.
     // El jugador debe introducir el Pokémon correctamente
     } else if (contAccion === 0) {
+        console.log(contAccion)
         let condicion1 = false;
         let condicion2 = false;
         let nuevoPokemonIndex = parseInt(document.getElementById('accion').value);
@@ -1165,6 +1166,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         }
     // Turno del jugador 1
     } else if (contAccion === 1) {
+        console.log(contAccion)
         valorJugador1 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador1) ||
             parseInt(valorJugador1) < 0 ||
