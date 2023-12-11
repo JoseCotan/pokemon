@@ -648,39 +648,39 @@ function limitarSeleccion(fieldset) {
 }
 
 // Selecciona el 1er y 2do elemento fieldset del HTML
-const fieldset1 = document.querySelector('fieldset:nth-of-type(1)');
-const fieldset2 = document.querySelector('fieldset:nth-of-type(2)');
+var fieldset1 = document.querySelector('fieldset:nth-of-type(1)');
+var fieldset2 = document.querySelector('fieldset:nth-of-type(2)');
 
 limitarSeleccion(fieldset1);
 limitarSeleccion(fieldset2);
 
 
-// Actualiza el array con los valores de los Pokémon seleccionados.
 function actualizarPokemonsSeleccionados1() {
-    // Se inicia como un array vacío.
     pokemonsSeleccionados1 = [];
-    const checkboxes =
-        // Selecciona todas las casillas de verificación con el nombre "pokemonJugador1" que estén marcadas.
+    var checkboxes =
         document.querySelectorAll('input[name="pokemonJugador1"]:checked');
 
-    // Itera sobre cada casilla de verificación marcada.
     checkboxes.forEach(checkbox => {
-        // Se obtiene el valor de la casilla marcada y se agrega ese pokemon al array.
         pokemonsSeleccionados1.push(Object.values(POKEMONS1)[checkbox.value]);
     });
 }
 
+// Actualiza el array con los valores de los Pokémon seleccionados.
 function actualizarPokemonsSeleccionados2() {
+    // Se inicia como un array vacío.
     pokemonsSeleccionados2 = [];
-    const checkboxes =
+    var checkboxes =
+    // Selecciona todas las casillas de verificación con el nombre "pokemonJugador1" que estén marcadas.
         document.querySelectorAll('input[name="pokemonJugador2"]:checked');
 
+    // Itera sobre cada casilla de verificación marcada.
     checkboxes.forEach(checkbox => {
+        // Se obtiene el valor de la casilla marcada y se agrega ese pokemon al array.
         pokemonsSeleccionados2.push(Object.values(POKEMONS2)[checkbox.value]);
     });
 }
 
-// Obtiene todas las casillas asociadas a los Pokémon del jugador 1 y 2, además
+// Se obtiene todas las casillas asociadas a los Pokémon del jugador 1 y 2, además
 // agrega un evento de cambio llamando a la función.
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', actualizarPokemonsSeleccionados1);
@@ -1107,8 +1107,9 @@ function compararVelocidad(pokemon1, pokemon2) {
     return pokemon1.estadisticas.velocidad > pokemon2.estadisticas.velocidad;
 }
 
-// Deter
+// Lógica de turnos
 document.getElementById('hacerAccion').addEventListener('click', function () {
+    // Si un Pokémon ha sido debilitado, pide al jugador que seleccione el nuevo Pokémon
     if (contAccion === -1) {
         if (pokemonDebilitado1) {
             pantalla.innerHTML = `Jugador 1 --> Selecciona el nuevo pokemon.`;
@@ -1119,6 +1120,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
             contAccion = 0;
             return;
         }
+    // El jugador ha sido avisado que necesita sacar un nuevo Pokémon.
+    // El jugador debe introducir el Pokémon correctamente
     } else if (contAccion === 0) {
         let condicion1 = false;
         let condicion2 = false;
@@ -1160,6 +1163,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         if (condicion1 && condicion2) {
             return;
         }
+    // Turno del jugador 1
     } else if (contAccion === 1) {
         valorJugador1 = document.getElementById('accion').value - 1;
         if (isNaN(valorJugador1) ||
@@ -1188,9 +1192,12 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         pantalla.innerHTML = "Turno del Jugador 2.";
         contAccion++
         return;
+    // Turno del jugador 2
     } else if (contAccion === 2) {
         valorJugador2 = document.getElementById('accion').value - 1;
-        if (isNaN(valorJugador2) || parseInt(valorJugador2) < 0 || parseInt(valorJugador2) > 6) {
+        if (isNaN(valorJugador2) ||
+            parseInt(valorJugador2) < 0 ||
+            parseInt(valorJugador2) > 6) {
             accion.value = '';
             pantalla.innerHTML = "Introduce un número correcto.<br>\
                                   Turno del Jugador 2.";
@@ -1213,6 +1220,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         accion.value = ''
         contAccion++
     }
+    // Una vez ambos jugadores han realizado sus movimientos, se ejecutan.
+    // Si el jugador eligió cambiar, tiene prioridad ante el ataque
     if (valorJugador1 >= 4 && valorJugador1 <= 7) {
         pokemonActual1 = valorJugador1 - 4;
         eliminarImagenes();
@@ -1243,7 +1252,8 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
         jugador2HaAtacado = true;
         return
     }
-
+    // Se lanza el ataque del Pokémon, teniendo en cuenta la velocidad del jugador y si el jugador ya ha atacado.
+    // Ataque rápido es un ataque que siempre ataca en 1er lugar, aquí se controla.
     if (pokemonsSeleccionados1[pokemonActual1].ataques[valorJugador1].nombre === "Ataque Rápido"
         && !jugador1HaAtacado) {
         pantalla.innerHTML =
@@ -1323,6 +1333,7 @@ document.getElementById('hacerAccion').addEventListener('click', function () {
     pantalla.innerHTML = "Turno del Jugador 1.";
 });
 
+// Se controla la efectividad de los ataques
 function esTipoEfectivo(tipoAtaque, tipoPokemon) {
     for (let i = 0; i < tipoAtaque.length; i++) {
         if (tipoPokemon.includes(tipoAtaque[i])) {
